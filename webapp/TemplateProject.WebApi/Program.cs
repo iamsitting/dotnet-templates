@@ -1,5 +1,8 @@
+using TemplateProject.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDatabase(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
