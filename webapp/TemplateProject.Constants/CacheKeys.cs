@@ -4,13 +4,14 @@ public static class CacheKeys
 {
     public enum Domain
     {
-        AppSettings
+        Templates
     }
 
     public enum CacheType
     {
         All,
         First,
-        Id
+        Id,
+        Name
     }
 }

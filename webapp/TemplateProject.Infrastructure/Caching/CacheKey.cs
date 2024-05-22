@@ -1,7 +1,7 @@
 using System.Text;
 using static TemplateProject.Constants.CacheKeys;
 
-namespace TemplateProject.Infrastructure;
+namespace TemplateProject.Infrastructure.Caching;
 
 public class CacheKey
 {

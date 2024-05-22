@@ -1,6 +1,6 @@
-namespace TemplateProject.Infrastructure.Implementations.Models;
+namespace TemplateProject.Infrastructure.Caching;
 
-public class CacheConfigurationOptions
+internal class CacheConfigurationOptions
 {
     public const string Key = "CacheConfigurationOptions";
     public int AbsoluteExpirationInMinutes { get; set; }

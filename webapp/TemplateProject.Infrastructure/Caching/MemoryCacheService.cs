@@ -2,9 +2,8 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using TemplateProject.Constants;
-using TemplateProject.Infrastructure.Implementations.Models;
 
-namespace TemplateProject.Infrastructure.Implementations;
+namespace TemplateProject.Infrastructure.Caching;
 
 internal class MemoryCacheService : ICacheService
 {

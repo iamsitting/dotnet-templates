@@ -1,6 +1,6 @@
 using static TemplateProject.Constants.CacheKeys;
 
-namespace TemplateProject.Infrastructure;
+namespace TemplateProject.Infrastructure.Caching;
 
 public interface ICacheService
 {

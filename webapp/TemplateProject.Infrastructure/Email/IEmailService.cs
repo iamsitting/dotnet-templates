@@ -1,4 +1,4 @@
-﻿namespace TemplateProject.Infrastructure;
+﻿namespace TemplateProject.Infrastructure.Email;
 
 public interface IEmailService
 {

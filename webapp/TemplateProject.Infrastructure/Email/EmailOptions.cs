@@ -1,4 +1,4 @@
-namespace TemplateProject.Infrastructure.Implementations.Models;
+namespace TemplateProject.Infrastructure.Email;
 
 public class EmailOptions
 {

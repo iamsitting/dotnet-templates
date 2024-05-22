@@ -1,12 +1,10 @@
-
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using TemplateProject.Infrastructure.Implementations.Models;
 
-namespace TemplateProject.Infrastructure.Implementations;
+namespace TemplateProject.Infrastructure.Email;
 
 public class EmailService : IEmailService
 {
