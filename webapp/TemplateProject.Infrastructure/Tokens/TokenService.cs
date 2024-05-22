@@ -87,4 +87,19 @@ public class TokenService : ITokenService
             return false;
         }
     }
+    
+    public string GenerateJwtTokenForClaims(IEnumerable<Claim> claims)
+    {
+        var credentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _issuer,
+            audience: _audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(24),
+            signingCredentials: credentials
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 }
