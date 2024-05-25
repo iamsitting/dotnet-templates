@@ -1,5 +1,6 @@
 using TemplateProject.Database;
 using TemplateProject.Infrastructure;
+using TemplateProject.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Host.AddCustomLogging(builder.Configuration);
+
+builder.Services.AddCustomAuthentication(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
 

@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TemplateProject.Constants\TemplateProject.Constants.csproj" />
+      <ProjectReference Include="..\TemplateProject.Database\TemplateProject.Database.csproj" />
+      <ProjectReference Include="..\TemplateProject.Entities\TemplateProject.Entities.csproj" />
     </ItemGroup>
 
     <ItemGroup>
