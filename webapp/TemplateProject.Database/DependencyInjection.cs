@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,5 +11,6 @@ public static class DependencyInjection
     {
         services.AddSingleton<IColumnTypes, SqliteColumnTypes>();
         var connectionString = configuration.GetConnectionString(connectionStringKey);
+        services.AddDbContext<TemplateProjectContext>(options => options.UseSqlite(connectionString));
     }
 }
