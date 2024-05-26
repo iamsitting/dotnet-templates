@@ -13,17 +13,12 @@ public static class Helpers
     private const string AreaName = "React";
     public const string ManifestPath = ".vite/manifest.json";
     
-    public static void UseReactApp(this IServiceCollection services)
+    public static void AddReactApp(this IServiceCollection services)
     {
         services.AddSession();
         services.AddHttpContextAccessor();
         services.AddRazorPages();
         services.AddSignalR();
-    }
-    
-    public static void UseReactApp(this WebApplication app)
-    {
-        app.UseSession();
     }
     
     public static IHtmlContent RenderStyles(this IHtmlHelper htmlHelper, string key, IWebHostEnvironment hostingEnvironment)

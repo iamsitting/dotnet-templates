@@ -1,6 +1,7 @@
 using TemplateProject.Database;
 using TemplateProject.Infrastructure;
 using TemplateProject.WebApi;
+using TemplateProject.WebApi.React.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Host.AddCustomLogging(builder.Configuration);
 builder.Services.AddCustomAuthentication(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddReactApp();
 
 var app = builder.Build();
 
