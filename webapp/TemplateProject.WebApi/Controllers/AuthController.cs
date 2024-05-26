@@ -44,14 +44,15 @@ public class AuthController : ControllerBase
     {
         var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
 
-        if (result.Succeeded)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            var token = _tokenService.GenerateJwtTokenForClaims(user!.GetJwtClaims());
-            return Ok(new { Token = token });
-        }
+        if (!result.Succeeded) return Unauthorized();
+        
+        var user = await _userManager.FindByEmailAsync(email);
 
-        return Unauthorized();
+        if (user == null) return Unauthorized("Could not find an associated account");
+        
+        var token = _tokenService.GenerateJwtTokenForClaims(user.GetJwtClaims());
+        return Ok(new { Token = token });
+
     }
 
     // POST: api/account/logout
