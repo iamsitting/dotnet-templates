@@ -41,12 +41,12 @@ public static class DependencyInjection
                     ValidAudience = settings.Audience,
                     IssuerSigningKey = signingKey
                 };
-            })
-            .AddCookie(IdentityConstants.ApplicationScheme, options =>
-            {
-                // Cookie authentication configuration
-                options.LoginPath = "/login-path";
-                options.LogoutPath = "/logout-path";
             });
+        
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/login-path";
+            options.LogoutPath = "/logout-path";
+        });
     }
 }

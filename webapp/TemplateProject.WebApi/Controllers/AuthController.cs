@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
 
     // POST: api/account/register
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] string email, [FromBody] string password)
+    public async Task<IActionResult> Register(string email, string password)
     {
         var user = new AppUser() { UserName = email, Email = email };
         var result = await _userManager.CreateAsync(user, password);
@@ -40,7 +40,7 @@ public class AuthController : ControllerBase
 
     // POST: api/account/login
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] string email, [FromBody] string password)
+    public async Task<IActionResult> Login(string email, string password)
     {
         var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
 

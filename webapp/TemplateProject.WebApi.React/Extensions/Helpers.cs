@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ public static class Helpers
 {
     private const string AreaName = "React";
     public const string ManifestPath = ".vite/manifest.json";
+    private static JsonDocument? _manifestDoc;
     
     public static void AddReactApp(this IServiceCollection services)
     {
@@ -21,31 +23,36 @@ public static class Helpers
         services.AddSignalR();
     }
     
-    public static IHtmlContent RenderStyles(this IHtmlHelper htmlHelper, string key, IWebHostEnvironment hostingEnvironment)
+    public static IHtmlContent RenderStyles(this IWebHostEnvironment hostingEnvironment, string key)
     {
         var manifest = GetManifestData(hostingEnvironment);
-        if (manifest != null && manifest.ContainsKey(key) && manifest[key].ContainsKey("file"))
+        if (manifest.HasValue && manifest.Value.TryGetProperty(key, out var keyValue) && keyValue.TryGetProperty("css", out JsonElement cssValue) && cssValue.ValueKind == JsonValueKind.Array)
         {
-            var cssPath = manifest[key]["file"].ToString();
-            return new HtmlString($"<link rel=\"stylesheet\" href=\"/_content/React/{cssPath}\">");
+            var stringBuilder = new StringBuilder();
+            foreach (var cssPath in cssValue.EnumerateArray())
+            {
+                stringBuilder.AppendLine($"<link rel=\"stylesheet\" href=\"/_content/React/{cssPath.GetString()}\">");
+            }
+            return new HtmlString(stringBuilder.ToString());
         }
         return new HtmlString($"<!-- Failed to render {key}-->");
     }
 
-    public static IHtmlContent RenderScripts(this IHtmlHelper htmlHelper, string key, IWebHostEnvironment hostingEnvironment)
+    public static IHtmlContent RenderScripts(this IWebHostEnvironment hostingEnvironment, string key)
     {
         var manifest = GetManifestData(hostingEnvironment);
-        if (manifest != null && manifest.ContainsKey(key) && manifest[key].ContainsKey("file"))
+        if (manifest.HasValue && manifest.Value.TryGetProperty(key, out JsonElement keyValue) && keyValue.TryGetProperty("file", out JsonElement fileValue) && fileValue.ValueKind == JsonValueKind.String)
         {
-            var scriptPath = manifest[key]["file"].ToString();
+            var scriptPath = fileValue.GetString();
             return new HtmlString($"<script type=\"module\" src=\"/_content/React/{scriptPath}\"></script>");
         }
         return new HtmlString($"<!-- Failed to render {key}-->");
     }
 
-    private static Dictionary<string, Dictionary<string, object>>? GetManifestData(IWebHostEnvironment hostingEnvironment)
+
+    private static JsonElement? GetManifestData(IWebHostEnvironment hostingEnvironment)
     {
-        
+        if (_manifestDoc != null) return _manifestDoc.RootElement;
         var manifestFilePath = hostingEnvironment.IsDevelopment()
             ? Path.Combine(hostingEnvironment.WebRootPath, "../../TemplateProject.WebApi.React/wwwroot", ManifestPath)
             : Path.Combine(hostingEnvironment.WebRootPath, "_content/React", "manifest.json");
@@ -53,7 +60,9 @@ public static class Helpers
         if (File.Exists(manifestFilePath))
         {
             var manifestJson = File.ReadAllText(manifestFilePath);
-            return JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(manifestJson);
+            _manifestDoc = JsonDocument.Parse(manifestJson);
+            var root = _manifestDoc.RootElement;
+            return root;
         }
 
         return null;

@@ -1,3 +1,4 @@
+using Serilog;
 using TemplateProject.Database;
 using TemplateProject.Infrastructure;
 using TemplateProject.WebApi;
@@ -14,6 +15,7 @@ builder.Host.AddCustomLogging(builder.Configuration);
 builder.Services.AddCustomAuthentication(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 builder.Services.AddReactApp();
 
 var app = builder.Build();
@@ -29,10 +31,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
-
-app.UseAuthorization();
-
 app.MapRazorPages();
+app.MapControllers();
+
+app.UseSerilogRequestLogging();
 
 app.Run();

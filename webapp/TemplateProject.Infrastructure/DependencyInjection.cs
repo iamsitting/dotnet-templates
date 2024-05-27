@@ -25,6 +25,11 @@ public static class DependencyInjection
         services.AddSingleton<ITokenService, TokenService>();
         services.AddScoped<ITemplateService, TemplateService>();
     }
+
+    public static void UseInfrastructure(this WebApplication app)
+    {
+        app.UseSerilogRequestLogging();
+    }
     
     public static void AddCustomLogging(this ConfigureHostBuilder host, IConfiguration configuration, bool isLocal=false, string connectionStringKey="TemplateProjectDb")
     {
