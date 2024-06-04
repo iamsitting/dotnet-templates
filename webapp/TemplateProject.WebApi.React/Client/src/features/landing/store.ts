@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {DefaultLandingState, LandingState} from "./models";
+import {AuthRequestPayload, DefaultLandingState, LandingState} from "./models";
 import {registerUser, sendCredentials} from "./controllers.ts";
 
-let globalState: LandingState = { ...DefaultLandingState };
+let globalState: LandingState = {...DefaultLandingState};
 let listeners: Function[] = [];
 
 const setGlobalState = (newState: LandingState) => {
@@ -24,47 +24,60 @@ export function useLandingStore() {
     const setAuthFormUsername = (username: string) => {
         setGlobalState({
             ...globalState,
-            authForm: { ...globalState.authForm, username },
+            authForm: {...globalState.authForm, username},
         });
     };
 
     const setAuthFormPassword = (password: string) => {
         setGlobalState({
             ...globalState,
-            authForm: { ...globalState.authForm, password },
+            authForm: {...globalState.authForm, password},
         });
     };
 
     const submitLoginForm = async () => {
-        const payload = { ...globalState.authForm };
-        setGlobalState({ ...DefaultLandingState });
+        const payload = {...globalState.authForm};
+        setGlobalState({...DefaultLandingState});
         await sendCredentials(payload);
     };
 
     const setRegFormUsername = (username: string) => {
         setGlobalState({
             ...globalState,
-            regForm: { ...globalState.regForm, username },
+            regForm: {...globalState.regForm, username},
         });
     };
 
     const setRegFormPassword = (password: string) => {
         setGlobalState({
             ...globalState,
-            regForm: { ...globalState.regForm, password },
+            regForm: {...globalState.regForm, password},
         });
     };
 
     const setRegFormConfirmPassword = (confirmPassword: string) => {
         setGlobalState({
             ...globalState,
-            regForm: { ...globalState.regForm, confirmPassword },
+            regForm: {...globalState.regForm, confirmPassword},
         });
     };
 
     const submitRegisterForm = async () => {
-        const payload = { ...globalState.regForm };
-        setGlobalState({ ...DefaultLandingState });
+        if (globalState.regForm.password !== globalState.regForm.confirmPassword) {
+            setGlobalState({
+                ...DefaultLandingState,
+                regForm: {
+                    ...globalState.regForm,
+                    message: "Passwords don't match."
+                }
+            });
+            return;
+        }
+        const payload: AuthRequestPayload = {
+            email: globalState.regForm.username,
+            password: globalState.regForm.password
+        };
+        setGlobalState({...DefaultLandingState});
         await registerUser(payload);
     };
 

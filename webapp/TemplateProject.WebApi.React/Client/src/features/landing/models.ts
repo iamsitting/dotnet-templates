@@ -7,6 +7,7 @@ export type RegisterForm = {
     username: string;
     password: string;
     confirmPassword: string;
+    message?: string;
 }
 
 export type LandingState = {
@@ -26,6 +27,11 @@ export const DefaultLandingState:LandingState = {
     }
 }
 
-export type TokenResponse = {
+export type TokenResponseData = {
     token: string;
+}
+
+export type AuthRequestPayload = {
+    email: string;
+    password: string;
 }

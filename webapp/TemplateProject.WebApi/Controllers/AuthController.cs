@@ -21,12 +21,13 @@ public class AuthController : ControllerBase
         _tokenService = tokenService;
     }
 
+    public record RegisterPayload(string Email, string Password);
     // POST: api/account/register
     [HttpPost("register")]
-    public async Task<IActionResult> Register(string email, string password)
+    public async Task<IActionResult> Register([FromBody] RegisterPayload payload)
     {
-        var user = new AppUser() { UserName = email, Email = email };
-        var result = await _userManager.CreateAsync(user, password);
+        var user = new AppUser() { UserName = payload.Email, Email = payload.Email };
+        var result = await _userManager.CreateAsync(user, payload.Password);
         
         if (result.Succeeded)
         {
@@ -37,7 +38,7 @@ public class AuthController : ControllerBase
 
         return BadRequest(result.Errors);
     }
-
+    
     // POST: api/account/login
     [HttpPost("login")]
     public async Task<IActionResult> Login(string email, string password)
