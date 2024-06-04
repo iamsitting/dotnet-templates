@@ -36,7 +36,10 @@ export function useLandingStore() {
     };
 
     const submitLoginForm = async () => {
-        const payload = {...globalState.authForm};
+        const payload: AuthRequestPayload = {
+            email: globalState.authForm.username,
+            password: globalState.authForm.password
+        };
         setGlobalState({...DefaultLandingState});
         await sendCredentials(payload);
     };

@@ -1,7 +1,7 @@
-import {AuthForm, AuthRequestPayload, TokenResponseData} from "./models";
+import {AuthRequestPayload, TokenResponseData} from "./models";
 import Cookies from "universal-cookie";
 
-export async function sendCredentials(payload: AuthForm){
+export async function sendCredentials(payload: AuthRequestPayload){
     const res = await fetch("/api/Auth/login", {
         method: "post",
         body: JSON.stringify({...payload})
