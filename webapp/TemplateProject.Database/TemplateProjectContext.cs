@@ -20,6 +20,7 @@ public class TemplateProjectContext : IdentityDbContext<AppUser, AppRole, Guid, 
     public DbSet<AppRole> AppRoles => Set<AppRole>();
     public DbSet<UserRoleMap> UserRoleMaps => Set<UserRoleMap>();
     public DbSet<LogEvent> LogEvents => Set<LogEvent>();
+    public DbSet<Book> Books => Set<Book>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,8 +29,7 @@ public class TemplateProjectContext : IdentityDbContext<AppUser, AppRole, Guid, 
         builder.ApplyConfiguration(new AppRoleConfiguration(_types));
         builder.ApplyConfiguration(new UserRoleMapConfiguration(_types));
         builder.ApplyConfiguration(new LogEventConfiguration(_types));
+        builder.ApplyConfiguration(new BookConfiguration(_types));
     }
-
-
-
+    
 }
