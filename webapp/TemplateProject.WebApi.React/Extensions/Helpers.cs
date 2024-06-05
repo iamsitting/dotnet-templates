@@ -21,7 +21,7 @@ public static class Helpers
     {
         services.AddSession();
         services.AddHttpContextAccessor();
-        services.AddRazorPages();
+        services.AddRazorPages().WithRazorPagesRoot("/React");
         services.AddSignalR();
         services.AddScoped<BooksRepository>();
     }

@@ -1,5 +1,6 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {addBook, getBooks} from "./controllers.ts";
+import {Link} from "react-router-dom";
 
 
 function BookList() {
@@ -61,6 +62,7 @@ function BookList() {
                 <input type="number" value={year} onChange={(e) => setYear(parseInt(e.target.value))} className="form-control"/>
                 <button className="btn btn-sm" onClick={() => addNewBook()}>Add</button>
             </div>
+            <Link to={"/"}>Go Back</Link>
         </>
     )
 }

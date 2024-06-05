@@ -13,8 +13,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Host.AddCustomLogging(builder.Configuration);
 
 builder.Services.AddCustomAuthentication(builder.Configuration);
-// Add services to the container.
-builder.Services.AddRazorPages();
+
 builder.Services.AddControllers();
 builder.Services.AddReactApp();
 
@@ -31,9 +30,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.MapRazorPages();
-app.UseReactRoutes();
 app.MapControllers();
+app.UseReactRoutes();
 
 app.UseSerilogRequestLogging();
 

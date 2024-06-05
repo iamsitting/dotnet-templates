@@ -3,6 +3,7 @@ import React from "react";
 import Register from "./Register";
 import Login from "./Login";
 import {FormType} from "./models";
+import {Link} from "react-router-dom";
 
 function Landing(){
     const store = useLandingStore();
@@ -12,6 +13,7 @@ function Landing(){
                 <LandingForm formType={store.state.formType}/>
                 <button className="btn btn-sm btn-secondary" onClick={store.toggleFormType}>Login/Register</button>
             </div>
+            <Link to={"/books"}>Go to Books</Link>
         </>
     )
 }
