@@ -1,13 +1,32 @@
 import {useState} from "react";
-import {getBooks} from "./controllers.ts";
+import {addBook, getBooks} from "./controllers.ts";
 
 
 function BookList() {
     const [books, setBooks] = useState<Book[]>([]);
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [year, setYear] = useState(1901);
     
     async function loadBooks(){
         const data = await getBooks();
         setBooks(data);
+    }
+    
+    async function addNewBook() {
+        const payload: Book = {
+            title,
+            author,
+            year,
+            id: null
+        }
+        const data = await addBook(payload)
+        if(data) {
+            setBooks([...books, data]);
+            setTitle('');
+            setAuthor('');
+            setYear(1901);
+        }
     }
     
     return (
@@ -33,6 +52,15 @@ function BookList() {
                 ))}
                 </tbody>
             </table>
+            <div>
+                <label className="form-label">Title</label>
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control"/>
+                <label className="form-label">Author</label>
+                <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} className="form-control"/>
+                <label className="form-label">Year</label>
+                <input type="number" value={year} onChange={(e) => setYear(parseInt(e.target.value))} className="form-control"/>
+                <button className="btn btn-sm" onClick={() => addNewBook()}>Add</button>
+            </div>
         </>
     )
 }

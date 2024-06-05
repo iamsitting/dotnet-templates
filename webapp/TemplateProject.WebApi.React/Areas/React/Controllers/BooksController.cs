@@ -17,4 +17,11 @@ public class BooksController : AreaControllerBase
         var results = _repository.GetBooks();
         return Ok(results);
     }
+
+    [HttpPost("add")]
+    public IActionResult Add([FromBody] BookViewModel payload)
+    {
+        var result = _repository.AddBook(payload);
+        return Ok(result);
+    }
 }

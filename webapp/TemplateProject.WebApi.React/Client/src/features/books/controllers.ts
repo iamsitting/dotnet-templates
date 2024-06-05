@@ -10,3 +10,12 @@ export async function getBooks() {
         return [];
     }
 }
+
+export async function addBook(payload: BookCreate) {
+    try {
+        return await httpClient.post<Book>("api/_react/Books/add", payload, true);
+    } catch(error) {
+        console.error("Failed to load resource:", error);
+        return null;
+    }
+}

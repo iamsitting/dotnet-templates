@@ -1,6 +1,6 @@
 type Book = {
     title: string;
     author: string;
-    id: string;
+    id: string|null;
     year: number;
 }
