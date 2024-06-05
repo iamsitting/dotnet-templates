@@ -1,15 +1,15 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import './features/landing/Login.tsx'
 import Login from "./features/landing/Login.tsx";
 import Register from "./features/landing/Register.tsx";
+import BookList from "./features/books/BookList.tsx";
 
 type FormType = 'login'|'register';
 function App() {
     
-    const [count, setCount] = useState(0)
     const [formType, setFormType] = useState<FormType>('login')
     function toggleFormType(){
         if (formType === 'login') {
@@ -31,16 +31,11 @@ function App() {
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                {GetForm(formType)}
+                <LandingFrom formType={formType}/>
                 <button className="btn btn-sm btn-secondary" onClick={toggleFormType}>Login/Register</button>
             </div>
             <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
+                <BookList/>
             </div>
             <p className="read-the-docs">
                 Click on the Vite and React logos to learn more
@@ -48,15 +43,15 @@ function App() {
         </>
     )
     
-    
-    function GetForm(formType: FormType) {
-        switch (formType) {
-            case 'register':
-                return <Register/>
-            case 'login':
-            default:
-                return <Login/>
-        }
+}
+
+const LandingFrom: React.FC<{formType: FormType}> = ({formType}) => {
+    switch (formType) {
+        case 'register':
+            return <Register/>
+        case 'login':
+        default:
+            return <Login/>
     }
 }
 

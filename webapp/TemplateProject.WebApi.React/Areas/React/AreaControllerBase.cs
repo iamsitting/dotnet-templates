@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TemplateProject.WebApi.React.Areas.React;
 
-[Area("React")]
-[Route("[area]/api/[controller]/")]
+[Route("api/_react/[controller]/")]
 [ApiController]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public abstract class AreaControllerBase : ControllerBase
