@@ -36,11 +36,12 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString(connectionStringKey);
         if (isLocal)
         {
+            var path = "../TemplateProject.Infrastructure/AppData/Logs/info.log";
             host.UseSerilog(
                 (_, logConfiguration) =>
                     logConfiguration
                         .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug)
-                        .WriteTo.File("Logs/info.log", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day)
+                        .WriteTo.File(path, restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day)
                         .WriteTo.MSSqlServer(connectionString: connectionString, restrictedToMinimumLevel: LogEventLevel.Warning, sinkOptions: new MSSqlServerSinkOptions
                         {
                             TableName = "LogEvents",
@@ -49,10 +50,11 @@ public static class DependencyInjection
         }
         else
         {
+            var path = "AppData/Logs/info.log";
             host.UseSerilog(
                 (context, logConfiguration) =>
                     logConfiguration
-                        .WriteTo.File("Logs/info.log", restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day)
+                        .WriteTo.File(path, restrictedToMinimumLevel: LogEventLevel.Information, rollingInterval: RollingInterval.Day)
                         .WriteTo.MSSqlServer(connectionString: connectionString, restrictedToMinimumLevel: LogEventLevel.Warning, sinkOptions: new MSSqlServerSinkOptions
                         {
                             TableName = "LogEvents",
