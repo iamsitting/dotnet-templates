@@ -10,9 +10,12 @@ export type RegisterForm = {
     message?: string;
 }
 
+export type FormType = 'login'|'register';
+
 export type LandingState = {
     authForm: AuthForm;
     regForm: RegisterForm;
+    formType: FormType;
 }
 
 export const DefaultLandingState:LandingState = {
@@ -24,7 +27,8 @@ export const DefaultLandingState:LandingState = {
         username: '',
         password: '',
         confirmPassword: ''
-    }
+    },
+    formType: 'login'
 }
 
 export type TokenResponseData = {

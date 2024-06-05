@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,12 @@ public static class Helpers
         services.AddRazorPages();
         services.AddSignalR();
         services.AddScoped<BooksRepository>();
+    }
+
+    public static void UseReactRoutes(this WebApplication app)
+    {
+        app.MapRazorPages();
+        app.MapFallbackToAreaPage("/React/{*reactAppPath}", "/Index", area: AreaName);
     }
     
     public static IHtmlContent RenderStyles(this IWebHostEnvironment hostingEnvironment, string key)

@@ -83,6 +83,13 @@ export function useLandingStore() {
         setGlobalState({...DefaultLandingState});
         await registerUser(payload);
     };
+    
+    const toggleFormType = () => {
+        setGlobalState({
+            ...globalState,
+            formType: globalState.formType === 'login' ? 'register' : 'login'
+        })
+    }
 
     return {
         state,
@@ -93,5 +100,6 @@ export function useLandingStore() {
         setRegFormPassword,
         setRegFormConfirmPassword,
         submitRegisterForm,
+        toggleFormType
     };
 }

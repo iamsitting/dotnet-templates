@@ -32,6 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.MapRazorPages();
+app.UseReactRoutes();
 app.MapControllers();
 
 app.UseSerilogRequestLogging();

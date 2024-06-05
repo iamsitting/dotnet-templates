@@ -32,6 +32,7 @@ public sealed class BooksRepository
     public BookViewModel AddBook(BookViewModel book)
     {
         var entity = book.ToEntity();
+        entity.CreatedOn = DateTime.Now;
         _context.Books.Add(entity);
         _context.SaveChanges();
         _cache.ClearDomain(CacheKeys.Domain.Books);
