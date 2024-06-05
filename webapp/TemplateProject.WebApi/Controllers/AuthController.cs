@@ -41,13 +41,13 @@ public class AuthController : ControllerBase
     
     // POST: api/account/login
     [HttpPost("login")]
-    public async Task<IActionResult> Login(string email, string password)
+    public async Task<IActionResult> Login([FromBody] RegisterPayload payload)
     {
-        var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
+        var result = await _signInManager.PasswordSignInAsync(payload.Email, payload.Password, isPersistent: false, lockoutOnFailure: false);
 
         if (!result.Succeeded) return Unauthorized();
         
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByEmailAsync(payload.Email);
 
         if (user == null) return Unauthorized("Could not find an associated account");
         

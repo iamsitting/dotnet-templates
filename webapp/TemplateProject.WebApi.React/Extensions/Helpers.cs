@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TemplateProject.WebApi.React.Areas.React.Controllers;
 
 namespace TemplateProject.WebApi.React.Extensions;
 
@@ -21,6 +22,7 @@ public static class Helpers
         services.AddHttpContextAccessor();
         services.AddRazorPages();
         services.AddSignalR();
+        services.AddScoped<BooksRepository>();
     }
     
     public static IHtmlContent RenderStyles(this IWebHostEnvironment hostingEnvironment, string key)

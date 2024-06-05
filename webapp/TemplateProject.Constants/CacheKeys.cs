@@ -4,7 +4,8 @@ public static class CacheKeys
 {
     public enum Domain
     {
-        Templates
+        Templates,
+        Books
     }
 
     public enum CacheType

@@ -28,6 +28,10 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TemplateProject.Database\TemplateProject.Database.csproj" />
+    <ProjectReference Include="..\TemplateProject.Infrastructure\TemplateProject.Infrastructure.csproj" />
+  </ItemGroup>
 
 
 </Project>
