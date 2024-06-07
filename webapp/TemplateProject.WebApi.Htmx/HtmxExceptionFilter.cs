@@ -41,7 +41,7 @@ public class HtmxExceptionFilter : IExceptionFilter
 
     private static string FormatContent(string message, string type = "danger")
     {
-        return $"<div class=\"uk-alert-{type}\" uk-alert><a href class=\"uk-alert-close\" uk-close></a><div>{message}</div></div>";
+        return $"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">{message}<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
     }
 }
 

@@ -1,6 +1,15 @@
 @page "/Htmx"
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Index
 
-<div>
-    <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
-</div>
+@if (!Model.IsLoggedIn)
+{
+    <div>
+        <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
+    </div>   
+}
+else
+{
+    <div>
+        Welcome!
+    </div>
+}

@@ -1,9 +1,11 @@
 <div id="login-container">
-    <form hx-post="">
+    <form hx-post hx-page-handler="LoginForm">
+        @Html.AntiForgeryToken()
         <label class="form-label">Username</label>
-        <input class="form-control"/>
+        <input class="form-control" type="text" name="payload.Email"/>
         <label class="form-label">Password</label>
-        <input class="form-control"/>
+        <input class="form-control" type="password" name="payload.Password"/>
+        <button type="submit">Submit</button>
     </form>
     <button class="btn" hx-get hx-page-handler="RegisterForm" hx-target="#login-container" hx-swap="outerHTML">Login/Register</button>
 </div>
