@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.WebApi.React", "TemplateProject.WebApi.React\TemplateProject.WebApi.React.csproj", "{AAA09396-54E1-4F00-9053-09616160C4DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.WebApi.Htmx", "TemplateProject.WebApi.Htmx\TemplateProject.WebApi.Htmx.csproj", "{75100D9C-3D08-4246-AF52-FC4BF2714358}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{AAA09396-54E1-4F00-9053-09616160C4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAA09396-54E1-4F00-9053-09616160C4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAA09396-54E1-4F00-9053-09616160C4DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

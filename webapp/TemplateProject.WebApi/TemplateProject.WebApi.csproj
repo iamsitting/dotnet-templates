@@ -11,6 +11,7 @@
     <ProjectReference Include="..\TemplateProject.Database\TemplateProject.Database.csproj" />
     <ProjectReference Include="..\TemplateProject.Infrastructure\TemplateProject.Infrastructure.csproj" />
     <ProjectReference Include="..\TemplateProject.WebApi.React\TemplateProject.WebApi.React.csproj" />
+    <ProjectReference Include="..\TemplateProject.WebApi.Htmx\TemplateProject.WebApi.Htmx.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

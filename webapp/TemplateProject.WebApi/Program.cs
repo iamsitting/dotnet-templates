@@ -2,6 +2,7 @@ using Serilog;
 using TemplateProject.Database;
 using TemplateProject.Infrastructure;
 using TemplateProject.WebApi;
+using TemplateProject.WebApi.Htmx;
 using TemplateProject.WebApi.React.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddCustomAuthentication(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddReactApp();
+builder.Services.AddHtmxApp();
 
 var app = builder.Build();
 
@@ -32,6 +34,7 @@ app.UseStaticFiles();
 
 app.MapControllers();
 app.UseReactRoutes();
+app.UseHtmxRoutes();
 
 app.UseSerilogRequestLogging();
 
