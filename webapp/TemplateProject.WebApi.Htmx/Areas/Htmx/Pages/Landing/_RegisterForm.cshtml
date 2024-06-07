@@ -1,0 +1,11 @@
+<div id="reg-container">
+    <form hx-post="">
+        <label class="form-label">Username</label>
+        <input class="form-control"/>
+        <label class="form-label">Password</label>
+        <input class="form-control"/>
+        <label class="form-label">Confirm Password</label>
+        <input class="form-control"/>
+    </form>
+    <button class="btn" hx-get hx-page-handler="LoginForm" hx-target="#reg-container" hx-swap="outerHTML">Login/Register</button>
+</div>

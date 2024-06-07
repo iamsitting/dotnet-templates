@@ -8,23 +8,25 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-<div>
-    <a href="https://vitejs.dev" target="_blank">
-        <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo" alt="Vite logo"/>
-    </a>
-    <a href="https://react.dev" target="_blank">
-        <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo react" alt="React logo"/>
-    </a>
+<div id="root">
+    <div>
+        <a href="https://vitejs.dev" target="_blank">
+            <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo" alt="Vite logo"/>
+        </a>
+        <a href="https://react.dev" target="_blank">
+            <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo react" alt="React logo"/>
+        </a>
+    </div>
+    <h1>Razor + HTMX</h1>
+    <div class="card">
+        <main id="main-content">
+            @RenderBody()
+        </main>
+    </div>
+    <p class="read-the-docs">
+        Click on the Vite and React logos to learn more
+    </p>
 </div>
-<h1>Razor + HTMX</h1>
-<div class="card">
-    <main id="main-content">
-        @RenderBody()
-    </main>
-</div>
-<p class="read-the-docs">
-    Click on the Vite and React logos to learn more
-</p>
 <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
