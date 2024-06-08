@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.WebApi.Reac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.WebApi.Htmx", "TemplateProject.WebApi.Htmx\TemplateProject.WebApi.Htmx.csproj", "{75100D9C-3D08-4246-AF52-FC4BF2714358}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProject.Tests", "TemplateProject.Tests\TemplateProject.Tests.csproj", "{D4AFAD0C-3D62-4D40-9797-972412C9345F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75100D9C-3D08-4246-AF52-FC4BF2714358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4AFAD0C-3D62-4D40-9797-972412C9345F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4AFAD0C-3D62-4D40-9797-972412C9345F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4AFAD0C-3D62-4D40-9797-972412C9345F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4AFAD0C-3D62-4D40-9797-972412C9345F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
