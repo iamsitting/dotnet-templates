@@ -31,7 +31,6 @@ public class AuthController : ControllerBase
         
         if (result.Succeeded)
         {
-            await _signInManager.SignInAsync(user, isPersistent: false);
             var token = _tokenService.GenerateJwtTokenForClaims(user.GetJwtClaims());
             return Ok(new { Token = token });
         }
@@ -43,14 +42,13 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] RegisterPayload payload)
     {
-        var result = await _signInManager.PasswordSignInAsync(payload.Email, payload.Password, isPersistent: false, lockoutOnFailure: false);
-
-        if (!result.Succeeded) return Unauthorized();
-        
         var user = await _userManager.FindByEmailAsync(payload.Email);
-
         if (user == null) return Unauthorized("Could not find an associated account");
-        
+
+        var success = await _userManager.CheckPasswordAsync(user, payload.Password);
+
+        if (!success) return Unauthorized();
+
         var token = _tokenService.GenerateJwtTokenForClaims(user.GetJwtClaims());
         return Ok(new { Token = token });
 
