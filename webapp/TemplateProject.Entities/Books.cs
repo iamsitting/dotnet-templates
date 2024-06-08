@@ -8,5 +8,5 @@ public sealed class Book : IEntity
     public int YearPublished { get; set; }
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }
-    public DateTime ArchivedOn { get; set; }
+    public DateTime? ArchivedOn { get; set; }
 }

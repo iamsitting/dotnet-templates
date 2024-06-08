@@ -4,24 +4,27 @@ namespace TemplateProject.WebApi.React.Areas.React.Controllers;
 
 public class BooksController : AreaControllerBase
 {
-    private readonly BooksRepository _repository;
+    private readonly CommandHandler _commandHandler;
+    private readonly QueryHandler _queryHandler;
 
-    public BooksController(BooksRepository repository)
+    public BooksController(CommandHandler commandHandler, QueryHandler queryHandler)
     {
-        _repository = repository;
+        _commandHandler = commandHandler;
+        _queryHandler = queryHandler;
     }
+
 
     [HttpGet]
     public IActionResult Index()
     {
-        var results = _repository.GetBooks();
+        var results = _queryHandler.Handle(new GetAllBooksQuery());
         return Ok(results);
     }
 
     [HttpPost("add")]
     public IActionResult Add([FromBody] BookViewModel payload)
     {
-        var result = _repository.AddBook(payload);
+        var result = _commandHandler.Handle(payload.ToCreateCommand());
         return Ok(result);
     }
 }

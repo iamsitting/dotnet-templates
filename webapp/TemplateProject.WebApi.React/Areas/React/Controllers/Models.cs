@@ -19,22 +19,7 @@ public class BookViewModel
         Year = entity.YearPublished;
     }
 
-    public Book ToEntity()
-    {
-        return new Book()
-        {
-            Id = new Guid(),
-            Title = Title,
-            Author = Author,
-            YearPublished = Year
-        };
-    }
+    public CreateBookCommand ToCreateCommand() => new(Title, Author, Year);
 
-    public Book MapToEntity(Book entity)
-    {
-        entity.Title = Title;
-        entity.Author = Author;
-        entity.YearPublished = Year;
-        return entity;
-    }
+    
 }

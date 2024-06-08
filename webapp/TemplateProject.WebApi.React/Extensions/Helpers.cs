@@ -23,7 +23,8 @@ public static class Helpers
         services.AddHttpContextAccessor();
         services.AddRazorPages().WithRazorPagesRoot("/React");
         services.AddSignalR();
-        services.AddScoped<BooksRepository>();
+        services.AddScoped<CommandHandler>();
+        services.AddScoped<QueryHandler>();
     }
 
     public static void UseReactRoutes(this WebApplication app)
