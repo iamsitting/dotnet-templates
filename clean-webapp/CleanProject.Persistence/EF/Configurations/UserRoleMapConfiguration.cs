@@ -1,8 +1,8 @@
-using CleanProject.Database.Entities.Identity;
+using CleanProject.Persistence.EF.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanProject.Database.Configurations;
+namespace CleanProject.Persistence.EF.Configurations;
 
 internal sealed class UserRoleMapConfiguration : IEntityTypeConfiguration<UserRoleMap>
 {
@@ -13,7 +13,7 @@ internal sealed class UserRoleMapConfiguration : IEntityTypeConfiguration<UserRo
         _types = types;
     }
 
-    public void Configure(EntityTypeBuilder<Entities.Identity.UserRoleMap> builder)
+    public void Configure(EntityTypeBuilder<UserRoleMap> builder)
     {
         builder.HasKey(x => new { x.RoleId, x.UserId });
         

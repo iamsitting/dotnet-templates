@@ -40,7 +40,7 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString(connectionStringKey);
         if (isLocal)
         {
-            var path = "../TemplateProject.Infrastructure/AppData/Logs/info.log";
+            var path = "Logs/info.log";
             host.UseSerilog(
                 (_, logConfiguration) =>
                     logConfiguration
@@ -54,7 +54,7 @@ public static class DependencyInjection
         }
         else
         {
-            var path = "AppData/Logs/info.log";
+            var path = " Logs/info.log";
             host.UseSerilog(
                 (context, logConfiguration) =>
                     logConfiguration

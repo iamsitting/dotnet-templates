@@ -1,8 +1,8 @@
-using CleanProject.Database.Entities.Identity;
+using CleanProject.Persistence.EF.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanProject.Database.Configurations;
+namespace CleanProject.Persistence.EF.Configurations;
 
 internal sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
 {

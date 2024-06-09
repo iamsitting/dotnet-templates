@@ -1,4 +1,4 @@
-﻿namespace CleanProject.CoreApplication.Database;
+﻿namespace CleanProject.Persistence.EF.Entities;
 
 public interface IBaseEntity
 {

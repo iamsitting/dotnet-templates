@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Database", "CleanProject.Database\CleanProject.Database.csproj", "{DCDFF779-6FA9-4249-A061-6BA13B5339BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Persistence", "CleanProject.Persistence\CleanProject.Persistence.csproj", "{DCDFF779-6FA9-4249-A061-6BA13B5339BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.CoreApplication", "CleanProject.CoreApplication\CleanProject.CoreApplication.csproj", "{46D786F0-8DD5-46D2-8347-A42E4666DF0A}"
 EndProject

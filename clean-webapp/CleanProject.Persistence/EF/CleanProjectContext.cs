@@ -1,13 +1,13 @@
-using CleanProject.Database.Configurations;
-using CleanProject.Database.Entities;
-using CleanProject.Database.Entities.Identity;
+using CleanProject.Persistence.EF.Configurations;
+using CleanProject.Persistence.EF.Entities;
+using CleanProject.Persistence.EF.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanProject.Database;
+namespace CleanProject.Persistence.EF;
 
-public class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>, UserRoleMap, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
+public sealed class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>, UserRoleMap, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
 {
     private readonly IColumnTypes _types;
 

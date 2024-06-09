@@ -1,7 +1,6 @@
-using CleanProject.CoreApplication.Database;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanProject.Database.Entities.Identity;
+namespace CleanProject.Persistence.EF.Entities.Identity;
 
 public sealed class UserRoleMap : IdentityUserRole<Guid>, IBaseEntity
 {

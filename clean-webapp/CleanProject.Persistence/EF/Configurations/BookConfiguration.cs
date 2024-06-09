@@ -1,8 +1,8 @@
-using CleanProject.Database.Entities;
+using CleanProject.Persistence.EF.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanProject.Database.Configurations;
+namespace CleanProject.Persistence.EF.Configurations;
 
 internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
 {

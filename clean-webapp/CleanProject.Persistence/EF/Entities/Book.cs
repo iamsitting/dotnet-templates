@@ -1,6 +1,4 @@
-using CleanProject.CoreApplication.Database;
-
-namespace CleanProject.Database.Entities;
+namespace CleanProject.Persistence.EF.Entities;
 
 public sealed class Book : IEntity
 {

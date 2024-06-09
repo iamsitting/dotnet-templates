@@ -1,4 +1,4 @@
-﻿namespace CleanProject.Database;
+﻿namespace CleanProject.Persistence.EF;
 
 public interface IColumnTypes
 {

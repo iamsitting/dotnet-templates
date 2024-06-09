@@ -1,4 +1,4 @@
-namespace CleanProject.Database;
+namespace CleanProject.Persistence.EF;
 
 internal class SqliteColumnTypes : IColumnTypes
 {

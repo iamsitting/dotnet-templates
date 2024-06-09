@@ -1,8 +1,11 @@
+using CleanProject.CoreApplication.Domain.Books;
+using CleanProject.Persistence.EF;
+using CleanProject.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanProject.Database;
+namespace CleanProject.Persistence;
 
 public static class DependencyInjection
 {
@@ -12,5 +15,7 @@ public static class DependencyInjection
         services.AddSingleton<IColumnTypes, SqliteColumnTypes>();
         var connectionString = configuration.GetConnectionString(connectionStringKey);
         services.AddDbContext<CleanProjectContext>(options => options.UseSqlite(connectionString));
+
+        services.AddScoped<IBookRepository, BookRepository>();
     }
 }
