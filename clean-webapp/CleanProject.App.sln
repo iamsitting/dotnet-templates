@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Database", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.CoreApplication", "CleanProject.CoreApplication\CleanProject.CoreApplication.csproj", "{46D786F0-8DD5-46D2-8347-A42E4666DF0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Infrastructure", "CleanProject.Infrastructure\CleanProject.Infrastructure.csproj", "{2028B06F-B4B8-4266-856E-7F1BCE3A5486}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{46D786F0-8DD5-46D2-8347-A42E4666DF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D786F0-8DD5-46D2-8347-A42E4666DF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46D786F0-8DD5-46D2-8347-A42E4666DF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2028B06F-B4B8-4266-856E-7F1BCE3A5486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2028B06F-B4B8-4266-856E-7F1BCE3A5486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2028B06F-B4B8-4266-856E-7F1BCE3A5486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2028B06F-B4B8-4266-856E-7F1BCE3A5486}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

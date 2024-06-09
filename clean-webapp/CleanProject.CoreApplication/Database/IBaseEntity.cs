@@ -1,4 +1,4 @@
-﻿namespace CleanProject.Database.Entities;
+﻿namespace CleanProject.CoreApplication.Database;
 
 public interface IBaseEntity
 {

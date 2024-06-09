@@ -7,11 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CleanProject.CoreApplication\CleanProject.CoreApplication.csproj" />
+        <ProjectReference Include="..\CleanProject.CoreApplication\CleanProject.CoreApplication.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+using CleanProject.CoreApplication.Database;
 using Microsoft.AspNetCore.Identity;
 
 namespace CleanProject.Database.Entities.Identity;

@@ -1,3 +1,5 @@
+using CleanProject.CoreApplication.Database;
+
 namespace CleanProject.Database.Entities;
 
 public class LogEvent : IEntity, ILogEvent
