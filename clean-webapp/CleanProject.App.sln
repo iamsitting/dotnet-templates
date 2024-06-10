@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Web", "CleanProject.Web\CleanProject.Web.csproj", "{8A28A6FB-E3C3-4186-B716-87BA98CB11C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanProject.Presentation.React", "CleanProject.Presentation.React\CleanProject.Presentation.React.csproj", "{C1F485A8-9040-4982-83DA-8A3D09E14A6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{8A28A6FB-E3C3-4186-B716-87BA98CB11C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A28A6FB-E3C3-4186-B716-87BA98CB11C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A28A6FB-E3C3-4186-B716-87BA98CB11C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F485A8-9040-4982-83DA-8A3D09E14A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F485A8-9040-4982-83DA-8A3D09E14A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F485A8-9040-4982-83DA-8A3D09E14A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F485A8-9040-4982-83DA-8A3D09E14A6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
