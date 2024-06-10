@@ -1,3 +1,5 @@
+using CleanProject.CoreApplication.Domain;
+
 namespace CleanProject.Persistence.EF.Entities;
 
 public class LogEvent : IEntity, ILogEvent

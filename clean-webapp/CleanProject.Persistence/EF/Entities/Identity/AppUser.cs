@@ -1,3 +1,4 @@
+using CleanProject.CoreApplication.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace CleanProject.Persistence.EF.Entities.Identity;

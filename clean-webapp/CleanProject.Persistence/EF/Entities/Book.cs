@@ -1,3 +1,4 @@
+using CleanProject.CoreApplication.Domain;
 using CleanProject.CoreApplication.Features.Books;
 
 namespace CleanProject.Persistence.EF.Entities;

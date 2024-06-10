@@ -1,4 +1,4 @@
-namespace CleanProject.Persistence.EF.Entities;
+namespace CleanProject.CoreApplication.Domain;
 
 public interface ILogEvent
 {
