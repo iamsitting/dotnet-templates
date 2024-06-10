@@ -23,9 +23,6 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(x => x.CreatedOn)
             .HasColumnType(_types.Timestamp());
 
-        builder.Property(x => x.Author)
-            .HasColumnType(_types.String(100));
-
         builder.Property(x => x.Title)
             .HasColumnType(_types.String(200));
 

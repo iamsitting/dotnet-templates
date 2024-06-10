@@ -6,13 +6,13 @@ namespace CleanProject.Persistence.EF.Entities;
 public sealed class Book : IBaseEntity, IWithKey<Guid>
 {
     public Guid Id { get; set; }
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
     public int YearPublished { get; set; }
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }
     public DateTime? ArchivedOn { get; set; }
     public Guid AuthorId { get; set; }
-    public Author Author { get; set; }
+    public Author Author { get; set; } = null!;
     // reverse
     public List<BookPublisherMap> BookPublisherMaps { get; set; } = [];
     public BookDto AsDto()
@@ -61,4 +61,5 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
         YearPublished = command.YearPublished;
         AuthorId = command.Author.Id;
     }
+    public Book(){}
 }
