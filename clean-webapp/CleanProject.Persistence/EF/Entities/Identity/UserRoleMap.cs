@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CleanProject.Persistence.EF.Entities.Identity;
 
-public sealed class UserRoleMap : IdentityUserRole<Guid>, IBaseEntity
+public sealed class UserRoleMap : IdentityUserRole<Guid>, IUserRole, IBaseEntity
 {
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }

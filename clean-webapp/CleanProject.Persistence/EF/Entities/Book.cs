@@ -3,7 +3,7 @@ using CleanProject.CoreApplication.Features.Books;
 
 namespace CleanProject.Persistence.EF.Entities;
 
-public sealed class Book : IEntity
+public sealed class Book : IBook, IBaseEntity, IWithKey<Guid>
 {
     public Guid Id { get; set; }
     public string Author { get; set; }
@@ -15,21 +15,26 @@ public sealed class Book : IEntity
     
     public BookDto AsDto()
     {
-        return new BookDto(Id, Title, Author, YearPublished);
+        return new BookDto
+        {
+            Title = Title,
+            Author = Author,
+            YearPublished = YearPublished,
+            Id = Id
+        };
     }
     
-    public void MapFromCommand(UpdateBookCommand command)
+    public void MapFromCommand(IBook command)
     {
         Title = command.Title;
         Author = command.Author;
-        YearPublished = command.Year;
+        YearPublished = command.YearPublished;
     }
 
-    public Book(AddBookCommand command)
+    public Book(IBook command)
     {
         Title = command.Title;
         Author = command.Author;
-        YearPublished = command.Year;
-        CreatedOn = DateTime.Now;
+        YearPublished = command.YearPublished;
     }
 }

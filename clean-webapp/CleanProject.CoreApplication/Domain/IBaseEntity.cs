@@ -7,7 +7,7 @@ public interface IBaseEntity
     public DateTime? ArchivedOn { get; set; }
 }
 
-public interface IEntity : IBaseEntity
+public interface IWithKey<TKey>
 {
-    public Guid Id { get; set; }
+    public TKey Id { get; set; }
 }

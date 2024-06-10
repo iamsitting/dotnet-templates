@@ -1,4 +1,5 @@
 using CleanProject.CoreApplication.Constants;
+using CleanProject.CoreApplication.Domain;
 using CleanProject.CoreApplication.Features.Books;
 using CleanProject.CoreApplication.Infrastructure.Caching;
 using CleanProject.Persistence.EF;
@@ -17,7 +18,7 @@ public class BookRepository : IBookRepository
         _cache = cache;
     }
 
-    public IEnumerable<BookDto> Handle(GetAllBooksQuery _)
+    public IEnumerable<BookDto> GetAll()
     {
         var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.All);
         var success = _cache.TryGet(key, out IEnumerable<BookDto> result);
@@ -28,15 +29,19 @@ public class BookRepository : IBookRepository
         return result;
     }
 
-    public BookDto Handle(AddBookCommand command)
+    public BookDto Add(BookDto command)
     {
-        var entity = new Book(command);
+        var entity = new Book(command)
+        {
+            Id = new Guid(),
+            CreatedOn = DateTime.Now
+        };
         _context.Books.Add(entity);
         _cache.ClearDomain(CacheKeys.Domain.Books);
         return entity.AsDto();
     }
 
-    public BookDto Handle(UpdateBookCommand command)
+    public BookDto Update(BookDto command)
     {
         var entity = _context.Books.First(x => x.Id == command.Id);
         entity.MapFromCommand(command);
@@ -46,7 +51,7 @@ public class BookRepository : IBookRepository
         return entity.AsDto();
     }
 
-    public BookDto Handle(GetBookByIdQuery query)
+    public BookDto GetById(IWithKey<Guid> query)
     {
         var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.Id, query.Id.ToString());
         var success = _cache.TryGet(key, out BookDto result);

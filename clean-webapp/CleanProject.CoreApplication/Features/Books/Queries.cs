@@ -15,13 +15,13 @@ public class QueryHandler
 
     public BookDto Handle(GetBookByIdQuery query)
     {
-        var book = _repository.Handle(query);
+        var book = _repository.GetById(new BookDto(query));
         return book;
     }
 
     public IEnumerable<BookDto> Handle(GetAllBooksQuery query)
     {
-        var books = _repository.Handle(query);
+        var books = _repository.GetAll();
         return books;
     }
 }

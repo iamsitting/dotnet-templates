@@ -2,7 +2,7 @@ using CleanProject.CoreApplication.Domain;
 
 namespace CleanProject.Persistence.EF.Entities;
 
-public class LogEvent : IEntity, ILogEvent
+public class LogEvent : ILogEvent, IBaseEntity, IWithKey<Guid>
 {
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }

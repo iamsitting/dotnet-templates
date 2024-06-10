@@ -39,7 +39,7 @@ public class CommandHandler
         }
         
 
-        _repository.Handle(command);
+        _repository.Add(new BookDto(command));
         
         var msg = await _templateService.GetTemplateFromParametersAsync(new ResetPasswordParameters("", "", "", ""));
         await _emailService.SendEmailGenericAsync("", "", "", msg);
