@@ -14,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CleanProject.CoreApplication\CleanProject.CoreApplication.csproj" />
+      <ProjectReference Include="..\CleanProject.Persistence\CleanProject.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>
