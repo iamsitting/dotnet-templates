@@ -6,7 +6,7 @@ using CleanProject.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDatabase(builder.Configuration);
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, isLocal:true);
 builder.Services.AddCustomAuthentication(builder.Configuration);
 builder.Services.AddReactApp();
 var app = builder.Build();
@@ -19,5 +19,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseReactRoutes();
-
-app.Run();
+app.Map("/", () => "Hello!");
+app.Run("http://localhost:5140");
