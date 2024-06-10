@@ -4,8 +4,8 @@ using CleanProject.Infrastructure.Templates;
 
 namespace CleanProject.CoreApplication.Features.Books;
 
-public record AddBookCommand(string Title, string Author, int Year);
-public record UpdateBookCommand(Guid Id, string Title, string Author, int Year);
+public record AddBookCommand(string Title, Guid AuthorId, int Year, Guid[] PublisherIds);
+public record UpdateBookCommand(Guid Id, string Title, Guid AuthorId, int Year);
 
 public class CommandHandler
 {
@@ -31,7 +31,7 @@ public class CommandHandler
             throw ex;
         }
 
-        if (string.IsNullOrEmpty(command.Title) || string.IsNullOrEmpty(command.Author))
+        if (string.IsNullOrEmpty(command.Title) || command.AuthorId == Guid.Empty || command.PublisherIds.Length == 0)
         {
             var ex = new Exception("Invalid");
             _logger.LogError("Failed to add book", ex);

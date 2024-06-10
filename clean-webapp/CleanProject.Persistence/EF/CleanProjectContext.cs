@@ -21,6 +21,9 @@ public sealed class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Gu
     public DbSet<UserRoleMap> UserRoleMaps => Set<UserRoleMap>();
     public DbSet<LogEvent> LogEvents => Set<LogEvent>();
     public DbSet<Book> Books => Set<Book>();
+    public DbSet<Author> Authors => Set<Author>();
+    public DbSet<Publisher> Publishers => Set<Publisher>();
+    public DbSet<BookPublisherMap> BookPublisherMaps => Set<BookPublisherMap>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

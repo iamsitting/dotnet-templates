@@ -37,6 +37,12 @@ public class BookRepository : IBookRepository
             CreatedOn = DateTime.Now
         };
         _context.Books.Add(entity);
+        var maps = command.Publishers.Select(x => new BookPublisherMap()
+        {
+            BookId = entity.Id,
+            PublisherId = x.Id
+        });
+        _context.BookPublisherMaps.AddRange(maps);
         _cache.ClearDomain(CacheKeys.Domain.Books);
         return entity.AsDto();
     }
@@ -44,7 +50,7 @@ public class BookRepository : IBookRepository
     public BookDto Update(BookDto command)
     {
         var entity = _context.Books.First(x => x.Id == command.Id);
-        entity.MapFromCommand(command);
+        entity.MapFromDto(command);
         _context.Books.Update(entity);
         _context.SaveChanges();
         _cache.ClearDomain(CacheKeys.Domain.Books);
@@ -57,7 +63,9 @@ public class BookRepository : IBookRepository
         var success = _cache.TryGet(key, out BookDto result);
         if (success) return result;
 
-        result = _context.Books.Select(x => x.AsDto()).First(x => x.Id == query.Id);
+        result = _context.Books
+            .Select(x => x.AsDto())
+            .First(x => x.Id == query.Id);
         _cache.Set(key, result);
         return result;
     }
