@@ -33,6 +33,9 @@ public sealed class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Gu
         builder.ApplyConfiguration(new UserRoleMapConfiguration(_types));
         builder.ApplyConfiguration(new LogEventConfiguration(_types));
         builder.ApplyConfiguration(new BookConfiguration(_types));
+        builder.ApplyConfiguration(new AuthorConfiguration(_types));
+        builder.ApplyConfiguration(new PublisherConfiguration(_types));
+        builder.ApplyConfiguration(new BookPublisherMapConfiguration());
     }
     
 }

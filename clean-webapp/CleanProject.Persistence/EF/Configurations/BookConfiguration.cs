@@ -28,5 +28,9 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
 
         builder.Property(x => x.Title)
             .HasColumnType(_types.String(200));
+
+        builder.HasOne(x => x.Author)
+            .WithMany()
+            .HasForeignKey(x => x.AuthorId);
     }
 }
