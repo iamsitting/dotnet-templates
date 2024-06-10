@@ -1,7 +1,7 @@
 using CleanProject.CoreApplication.Constants;
 using CleanProject.CoreApplication.Infrastructure.Caching;
 using CleanProject.CoreApplication.Infrastructure.Template;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace CleanProject.Infrastructure.Templates;
 
@@ -10,11 +10,9 @@ internal class TemplateService : ITemplateService
     private readonly string _basePath;
     private readonly ICacheService _cacheService;
 
-    public TemplateService(IHostEnvironment environment, ICacheService cacheService)
+    public TemplateService(ICacheService cacheService, IOptions<TemplateOptions> options)
     {
-        _basePath = environment.IsDevelopment()
-            ? "../CleanProject.Infrastructure/Templates"
-            : "./Templates";
+        _basePath = options.Value.TemplateLocation;
         _cacheService = cacheService;
     }
 

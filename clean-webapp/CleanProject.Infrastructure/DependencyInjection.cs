@@ -27,6 +27,8 @@ public static class DependencyInjection
         services.AddMemoryCache();
         services.AddSingleton<ICacheService, MemoryCacheService>();
         services.AddSingleton<ITokenService, TokenService>();
+
+        services.Configure<TemplateOptions>(configuration.GetRequiredSection(TemplateOptions.Key));
         services.AddScoped<ITemplateService, TemplateService>();
     }
 
