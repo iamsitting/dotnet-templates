@@ -15,6 +15,7 @@
       <ProjectReference Include="..\CleanProject.CoreApplication\CleanProject.CoreApplication.csproj" />
       <ProjectReference Include="..\CleanProject.Infrastructure\CleanProject.Infrastructure.csproj" />
       <ProjectReference Include="..\CleanProject.Persistence\CleanProject.Persistence.csproj" />
+      <ProjectReference Include="..\CleanProject.Presentation.React\CleanProject.Presentation.React.csproj" />
     </ItemGroup>
 
 </Project>

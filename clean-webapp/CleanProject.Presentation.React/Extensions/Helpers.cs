@@ -19,11 +19,9 @@ public static class Helpers
     
     public static void AddReactApp(this IServiceCollection services)
     {
-        services.AddSession();
-        services.AddHttpContextAccessor();
         services.AddRazorPages().WithRazorPagesRoot("/React");
-        services.AddSignalR();
         services.AddScoped<CommandHandler>();
+        services.AddScoped<QueryHandler>();
     }
 
     public static void UseReactRoutes(this WebApplication app)
