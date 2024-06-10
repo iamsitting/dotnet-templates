@@ -1,4 +1,4 @@
-using CleanProject.CoreApplication.Domain.Books;
+using CleanProject.CoreApplication.Features.Books;
 using CleanProject.Persistence.EF;
 using CleanProject.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

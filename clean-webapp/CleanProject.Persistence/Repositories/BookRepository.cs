@@ -1,8 +1,8 @@
 using CleanProject.CoreApplication.Constants;
-using CleanProject.CoreApplication.Domain.Books;
+using CleanProject.CoreApplication.Features.Books;
 using CleanProject.CoreApplication.Infrastructure.Caching;
 using CleanProject.Persistence.EF;
-using CleanProject.Persistence.Extensions;
+using CleanProject.Persistence.EF.Entities;
 
 namespace CleanProject.Persistence.Repositories;
 
@@ -17,7 +17,7 @@ public class BookRepository : IBookRepository
         _cache = cache;
     }
 
-    public IEnumerable<BookDto> GetAllBooks()
+    public IEnumerable<BookDto> Handle(GetAllBooksQuery _)
     {
         var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.All);
         var success = _cache.TryGet(key, out IEnumerable<BookDto> result);
@@ -28,23 +28,31 @@ public class BookRepository : IBookRepository
         return result;
     }
 
-    public BookDto UpdateBook(UpdateBookDto data)
+    public BookDto Handle(AddBookCommand command)
     {
-        var entity = _context.Books.First(x => x.Id == data.Id);
-        entity = data.MapToEntity(entity);
+        var entity = new Book(command);
+        _context.Books.Add(entity);
+        _cache.ClearDomain(CacheKeys.Domain.Books);
+        return entity.AsDto();
+    }
+
+    public BookDto Handle(UpdateBookCommand command)
+    {
+        var entity = _context.Books.First(x => x.Id == command.Id);
+        entity.MapFromCommand(command);
         _context.Books.Update(entity);
         _context.SaveChanges();
         _cache.ClearDomain(CacheKeys.Domain.Books);
         return entity.AsDto();
     }
 
-    public BookDto GetBookById(Guid id)
+    public BookDto Handle(GetBookByIdQuery query)
     {
-        var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.Id, id.ToString());
+        var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.Id, query.Id.ToString());
         var success = _cache.TryGet(key, out BookDto result);
         if (success) return result;
 
-        result = _context.Books.Select(x => x.AsDto()).First(x => x.Id == id);
+        result = _context.Books.Select(x => x.AsDto()).First(x => x.Id == query.Id);
         _cache.Set(key, result);
         return result;
     }
