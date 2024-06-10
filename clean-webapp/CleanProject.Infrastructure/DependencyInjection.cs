@@ -7,7 +7,6 @@ using CleanProject.Infrastructure.Email;
 using CleanProject.Infrastructure.Logging;
 using CleanProject.Infrastructure.Templates;
 using CleanProject.Infrastructure.Token;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
