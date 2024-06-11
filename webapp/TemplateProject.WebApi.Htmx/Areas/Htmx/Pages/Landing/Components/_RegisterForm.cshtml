@@ -1,11 +1,21 @@
 <div id="reg-container">
-    <form hx-post="">
-        <label class="form-label">Username</label>
-        <input class="form-control"/>
+    <form hx-post hx-page-handler="RegisterForm" hx-on:htmx:afterRequest="_RegisterForm_Clear();">
+        @Html.AntiForgeryToken()
+        <label class="form-label">Email</label>
+        <input class="form-control" name="email" type="email" required/>
         <label class="form-label">Password</label>
-        <input class="form-control"/>
+        <input class="form-control" name="password" type="password" required/>
         <label class="form-label">Confirm Password</label>
-        <input class="form-control"/>
+        <input class="form-control" name="confirmPassword" type="password" required/>
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </form>
     <button class="btn" hx-get hx-page-handler="LoginForm" hx-target="#reg-container" hx-swap="outerHTML">Login/Register</button>
+    <script>
+        function _RegisterForm_Clear() {
+            console.log("debug");
+            const form = document.querySelector("#reg-container form");
+            form.querySelector("[name='password']").value = '';
+            form.querySelector("[name='confirmPassword']").value = '';
+        }
+    </script>
 </div>

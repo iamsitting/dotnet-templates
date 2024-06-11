@@ -8,6 +8,7 @@ public static class LoginFormHandlers
 {
     public static IActionResult LoginForm(this Index page, object? model=null)
     {
+        page.Response.Headers["HX-Push-Url"] = "#login";
         return page.Partial("Components/_LoginForm", model);
     }
     

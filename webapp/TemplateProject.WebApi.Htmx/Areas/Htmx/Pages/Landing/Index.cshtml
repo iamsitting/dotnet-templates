@@ -4,7 +4,15 @@
 @if (!Model.IsLoggedIn)
 {
     <div>
-        <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
+        @if (Model.CurrentUrl?.EndsWith("#register") ?? false)
+        {
+            <div hx-get hx-page-handler="RegisterForm" hx-trigger="load" hx-swap="outerHTML"></div>
+        }
+        else
+        {
+            <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
+        }
+        
     </div>   
 }
 else

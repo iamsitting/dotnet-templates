@@ -9,6 +9,7 @@ public abstract class HtmxPageModel : PageModel
 {
     public bool IsHtmxRequest => HttpContext.Request.Headers["HX-Request"].Any();
     public bool IsLoggedIn => User.Identity?.IsAuthenticated ?? false;
+    public string? CurrentUrl => HttpContext.Request.Headers["HX-Current-URL"].FirstOrDefault();
     
     /// <summary>
     /// Boosted is wrapper around Page. If it's triggered by an HX-Request it acts as a boost
@@ -48,15 +49,22 @@ public abstract class HtmxPageModel : PageModel
         new ContentResult
         {
             StatusCode = 403,
-            Content = $"<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">{message}<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>",
+            Content = AlertContent(message, "alert-warning"),
             ContentType = "text/html",
         };
     
     public IActionResult ErrorContent(string message) =>
         new ContentResult
         {
-            StatusCode = 500,
-            Content = $"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">{message}<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>",
+            StatusCode = 400,
+            Content = AlertContent(message),
             ContentType = "text/html",
         };
+
+    private static string AlertContent(string message, string type = "alert-danger") => $"""
+                                                                 <div class="alert {type} alert-dismissible fade show" role="alert">
+                                                                     {message}
+                                                                     <button type="button" class="btn-close" aria-label="Close" onclick="event.target.parentElement.remove()"></button>
+                                                                     </div>
+                                                                 """;
 }

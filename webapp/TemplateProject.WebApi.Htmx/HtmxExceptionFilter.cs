@@ -1,3 +1,4 @@
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
@@ -33,15 +34,20 @@ public class HtmxExceptionFilter : IExceptionFilter
             _ => new ContentResult()
             {
                 StatusCode = 500,
-                Content = FormatContent(showDetail ? context.Exception.ToString() : "Server Error", "danger"),
+                Content = FormatContent(showDetail ? context.Exception.ToString() : "Server Error"),
                 ContentType = "text/html"
             }
         };
     }
 
-    private static string FormatContent(string message, string type = "danger")
+    private static string FormatContent(string message, string type = "alert-danger")
     {
-        return $"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">{message}<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+        return $"""
+                <div class="alert {type} alert-dismissible fade show" role="alert">
+                    {HttpUtility.HtmlEncode(message)}
+                    <button type="button" class="btn-close" aria-label="Close" onclick="event.target.parentElement.remove()"></button>
+                    </div>
+                """;
     }
 }
 

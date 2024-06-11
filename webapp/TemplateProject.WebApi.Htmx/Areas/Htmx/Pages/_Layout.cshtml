@@ -29,14 +29,14 @@
         Click on the Vite and React logos to learn more
     </p>
 </div>
-<script src="https://unpkg.com/htmx.org@1.9.6"></script>
+<script src="https://unpkg.com/htmx.org@1.9.7"></script>
 @await RenderSectionAsync("Scripts", required: false)
 <script>
     /* Global error handling */
     document.addEventListener("htmx:responseError", (e) => {
         let errorDiv = document.querySelector("#error-msg");
         console.error(e.detail.error);
-        errorDiv.innerHTML = e.detail.xhr.response;
+        errorDiv.insertAdjacentHTML('beforeend', e.detail.xhr.response);
         errorDiv.scrollIntoView();
     });
 </script>
