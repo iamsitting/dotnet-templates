@@ -22,5 +22,5 @@ app.UseStaticFiles();
 
 app.MapControllers();
 app.UseReactRoutes();
-app.Map("/", () => "Hello!");
+app.Map("/", () => "<div>Hello!</div> <div>Go to <a href='/React'>React</a></div>");
 app.Run("http://localhost:5140");

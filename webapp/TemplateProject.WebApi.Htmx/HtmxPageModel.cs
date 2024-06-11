@@ -11,11 +11,11 @@ public abstract class HtmxPageModel : PageModel
     public bool IsLoggedIn => User.Identity?.IsAuthenticated ?? false;
     
     /// <summary>
-    /// HxPage is wrapper around Page. If it's triggered by an HX-Request it acts as a boost
+    /// Boosted is wrapper around Page. If it's triggered by an HX-Request it acts as a boost
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    protected IActionResult HtmxPage(string target = "#main-content")
+    public IActionResult BoostedPage(string target = "#main-content")
     {
         if (IsHtmxRequest)
         {
@@ -27,19 +27,24 @@ public abstract class HtmxPageModel : PageModel
         return Page();
     }
 
-    protected NoContentResult HxRedirect(string url)
+    public IActionResult HxRedirect(string url)
     {
         HttpContext.Response.Headers["HX-Redirect"] = url;
-        return new NoContentResult();
+        return new ContentResult
+        {
+            Content = null,
+            ContentType = null,
+            StatusCode = 302
+        };
     }
-    protected IActionResult HtmxRedirect(string url)
+    public IActionResult BoostedRedirect(string url)
     {
         return IsHtmxRequest
             ? HxRedirect(url)
             : Redirect(url);
     }
     
-    protected static IActionResult ForbiddenContent(string message) =>
+    public IActionResult ForbiddenContent(string message) =>
         new ContentResult
         {
             StatusCode = 403,
@@ -47,7 +52,7 @@ public abstract class HtmxPageModel : PageModel
             ContentType = "text/html",
         };
     
-    protected static IActionResult ErrorContent(string message) =>
+    public IActionResult ErrorContent(string message) =>
         new ContentResult
         {
             StatusCode = 500,

@@ -32,12 +32,12 @@ public static class DependencyInjection
         services.AddScoped<ITemplateService, TemplateService>();
 
         var connectionString = configuration.GetConnectionString(connectionStringKey);
-        services.AddLogging(configuration, connectionString, isLocal);
+        services.AddLogging(connectionString, isLocal);
         services.AddSingleton(typeof(IAppLogger<>), typeof(SerilogLogger<>));
 
     }
 
-    private static void AddLogging(this IServiceCollection services, IConfiguration configuration,  string? connectionString = null, bool isLocal = false)
+    private static void AddLogging(this IServiceCollection services, string? connectionString = null, bool isLocal = false)
     {
         var path = "Logs/info.log";
         var loggerConfig = new LoggerConfiguration();
