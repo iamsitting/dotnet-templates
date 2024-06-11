@@ -23,6 +23,7 @@ public class HtmxExceptionFilter : IExceptionFilter
         var showDetail = _hostEnvironment.IsEnvironment("Development") || _hostEnvironment.IsEnvironment("Testing") || _hostEnvironment.IsEnvironment("Preview");
         var userName = context.HttpContext.User.Identity?.Name ?? "Anonymous";
         _logger.LogError("{id} at [{method}: {path} - {query}]: {error}", userName, context.HttpContext.Request.Method, context.HttpContext.Request.Path, context.HttpContext.Request.QueryString, context.Exception);
+
         context.Result = context.Exception switch
         {
             AccessControlException => new ContentResult()

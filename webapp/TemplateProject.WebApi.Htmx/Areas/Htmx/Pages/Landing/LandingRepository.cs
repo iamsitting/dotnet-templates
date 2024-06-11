@@ -48,7 +48,7 @@ public class LandingRepository
             return true;
         }
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+        var result = await _signInManager.PasswordSignInAsync(user.UserName, password, false, false);
         return result.Succeeded;
     }
     

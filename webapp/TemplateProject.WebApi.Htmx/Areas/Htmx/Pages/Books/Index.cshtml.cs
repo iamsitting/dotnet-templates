@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books;
 
-public class Index : PageModel
+public class Index : HtmxPageModel
 {
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        
+        return BoostedPage();
     }
 }

@@ -1,7 +1,14 @@
 @page "/Htmx"
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Landing.Index
 
-@if (!Model.IsLoggedIn)
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div>
+        <h3>Books</h3>
+        <button class="btn btn-primary btn-sm" hx-get hx-page="Books/Index">View Books</button>
+    </div>
+}
+else
 {
     <div>
         @if (Model.CurrentUrl?.EndsWith("#register") ?? false)
@@ -13,12 +20,5 @@
             <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
         }
         
-    </div>   
-}
-else
-{
-    <div>
-        <h3>Books</h3>
-        <button class="btn btn-primary btn-sm" hx-get hx-page="Books/Index">View Books</button>
     </div>
 }

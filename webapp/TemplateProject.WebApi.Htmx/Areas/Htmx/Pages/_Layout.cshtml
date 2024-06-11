@@ -37,6 +37,7 @@
         let errorDiv = document.querySelector("#error-msg");
         console.error(e.detail.error);
         errorDiv.insertAdjacentHTML('beforeend', e.detail.xhr.response);
+        htmx.process(errorDiv);
         errorDiv.scrollIntoView();
     });
 </script>
