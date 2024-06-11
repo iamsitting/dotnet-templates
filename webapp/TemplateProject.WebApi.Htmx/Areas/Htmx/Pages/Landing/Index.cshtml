@@ -1,11 +1,11 @@
 @page "/Htmx"
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Landing.Index
 
-@if (User.Identity?.IsAuthenticated ?? false)
+@if (Model.IsLoggedIn)
 {
     <div>
         <h3>Books</h3>
-        <button class="btn btn-primary btn-sm" hx-get hx-page="Books/Index">View Books</button>
+        <button class="btn btn-primary btn-sm" hx-get hx-page="/Books/Index">View Books</button>
     </div>
 }
 else

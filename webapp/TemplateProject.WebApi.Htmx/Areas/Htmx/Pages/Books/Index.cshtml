@@ -1,4 +1,4 @@
-@page
+@page "/Htmx/Books"
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Index
 
 @{
@@ -6,4 +6,7 @@
     ViewData["Title"] = Model.PageTitle;
 }
 <title> @Model.PageTitle </title>
-<h1>Books</h1>
+<h3>Books</h3>
+<div id="book-container">
+    <button class="btn btn-primary btn-sm" hx-get hx-page-handler="BookList" hx-target="#book-container">Get Book</button>
+</div>
