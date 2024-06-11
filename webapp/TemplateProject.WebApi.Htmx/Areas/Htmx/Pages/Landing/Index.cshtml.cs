@@ -1,23 +1,19 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TemplateProject.Entities.Identity;
 using TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Landing.Components;
 
 namespace TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Landing;
 
 public class Index : HtmxPageModel
 {
-    public readonly SignInManager<AppUser> SignInManager;
-    public readonly UserManager<AppUser> UserManager;
-    public Index(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+    public readonly LandingRepository Repository;
+    public Index(LandingRepository repository)
     {
-        SignInManager = signInManager;
-        UserManager = userManager;
+        Repository = repository;
     }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        
+        return BoostedPage();
     }
 
     public IActionResult OnGetLoginForm()

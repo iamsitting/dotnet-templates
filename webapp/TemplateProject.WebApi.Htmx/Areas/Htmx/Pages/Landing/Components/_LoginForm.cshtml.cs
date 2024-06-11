@@ -13,11 +13,9 @@ public static class LoginFormHandlers
     
     public static async Task<IActionResult> LoginFormAsync(this Index page, LoginFormPayload payload)
     {
-        var result = await page.SignInManager.PasswordSignInAsync(payload.Email, payload.Password, false, true);
-        if (!result.Succeeded)
-        {
-            return page.ForbiddenContent("Incorrect e-mail or password");
-        }
+        var user = await page.Repository.GetUserByEmailAsync(payload.Email);
+        var success = await page.Repository.SignIn(user, payload.Password);
+        if (!success) return page.ForbiddenContent("Sign in attempt failed");
         return page.BoostedPage();
     }
 }

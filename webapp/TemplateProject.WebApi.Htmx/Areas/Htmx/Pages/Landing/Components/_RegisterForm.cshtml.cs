@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using TemplateProject.Entities.Identity;
 
 namespace TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Landing.Components;
 
@@ -14,11 +13,9 @@ public static class RegisterFormHandlers
 
     public static async Task<IActionResult> RegisterFormAsync(this Index page, RegisterFormPayload payload)
     {
-        var user = new AppUser() { UserName = payload.Email, Email = payload.Email };
-        var result = await page.UserManager.CreateAsync(user, payload.Password);
-        if (!result.Succeeded) return page.BadRequest(result.Errors);
-
-        await page.SignInManager.SignInAsync(user, true);
+        var user = await page.Repository.CreateUserAsync(payload.Email, payload.Password);
+        
+        await page.Repository.SignIn(user);
         return page.BoostedPage();
     }
 }
