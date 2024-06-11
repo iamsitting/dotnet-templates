@@ -12,12 +12,15 @@ builder.Services.AddReactApp();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.MapControllers();
 app.UseReactRoutes();
 app.Map("/", () => "Hello!");
 app.Run("http://localhost:5140");

@@ -19,6 +19,7 @@ public static class Helpers
     
     public static void AddReactApp(this IServiceCollection services)
     {
+        services.AddControllers();
         services.AddRazorPages().WithRazorPagesRoot("/React");
         services.AddScoped<CommandHandler>();
         services.AddScoped<QueryHandler>();
@@ -84,9 +85,11 @@ public static class Helpers
     private static JsonElement? GetManifestData(IWebHostEnvironment hostingEnvironment)
     {
         if (_manifestDoc != null) return _manifestDoc.RootElement;
+        Console.WriteLine("HEEEEEELLLLLLOOOOOOOO");
+        Console.WriteLine(hostingEnvironment.ContentRootPath);
         var manifestFilePath = hostingEnvironment.IsDevelopment()
-            ? Path.Combine(hostingEnvironment.WebRootPath, $"../../{ClassLibPath}/wwwroot", ManifestPath)
-            : Path.Combine(hostingEnvironment.WebRootPath, $"_content/{ClassLibPath}", "manifest.json");
+            ? Path.Combine(hostingEnvironment.ContentRootPath, $"../{ClassLibPath}/wwwroot", ManifestPath)
+            : Path.Combine(hostingEnvironment.ContentRootPath, $"wwwroot/_content/{ClassLibPath}", "manifest.json");
 
         if (File.Exists(manifestFilePath))
         {

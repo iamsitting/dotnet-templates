@@ -4,6 +4,7 @@ using CleanProject.CoreApplication.Features.Books;
 using CleanProject.CoreApplication.Infrastructure.Caching;
 using CleanProject.Persistence.EF;
 using CleanProject.Persistence.EF.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanProject.Persistence.Repositories;
 
@@ -24,7 +25,9 @@ public class BookRepository : IBookRepository
         var success = _cache.TryGet(key, out IEnumerable<BookDto> result);
         if (success) return result;
 
-        result = _context.Books.Select(x => x.AsDto()).ToList();
+        result = _context.Books
+            .Include(x => x.Author)
+            .Select(x => x.AsDto()).ToList();
         _cache.Set(key, result);
         return result;
     }
@@ -37,6 +40,7 @@ public class BookRepository : IBookRepository
             CreatedOn = DateTime.Now
         };
         _context.Books.Add(entity);
+        _context.SaveChanges();
         var maps = command.Publishers.Select(x => new BookPublisherMap()
         {
             BookId = entity.Id,

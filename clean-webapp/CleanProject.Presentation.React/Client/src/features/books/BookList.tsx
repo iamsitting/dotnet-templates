@@ -8,6 +8,7 @@ function BookList() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [year, setYear] = useState(1901);
+    const [publisher, setPublisher] = useState('');
     
     async function loadBooks(){
         const data = await getBooks();
@@ -19,7 +20,8 @@ function BookList() {
             title,
             author,
             year,
-            id: null
+            id: null,
+            publisher,
         }
         const data = await addBook(payload)
         if(data) {
@@ -27,6 +29,7 @@ function BookList() {
             setTitle('');
             setAuthor('');
             setYear(1901);
+            setPublisher('');
         }
     }
     
@@ -61,6 +64,8 @@ function BookList() {
                 <label className="form-label">Year</label>
                 <input type="number" value={year} onChange={(e) => setYear(parseInt(e.target.value))} className="form-control"/>
                 <button className="btn btn-sm" onClick={() => addNewBook()}>Add</button>
+                <label className="form-label">Publisher</label>
+                <input type="text" value={publisher} className="form-control" onChange={(e) => setPublisher(e.target.value)}/>
             </div>
             <Link to={"/"}>Go Back</Link>
         </>

@@ -59,7 +59,20 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
     {
         Title = command.Title;
         YearPublished = command.YearPublished;
-        AuthorId = command.Author.Id;
+        if (command.Author.Id == Guid.Empty)
+        {
+            Author = new Author()
+            {
+                FirstName = command.Author.Name,
+                LastName = command.Author.Name,
+                DateOfBirth = DateOnly.FromDateTime(DateTime.Now),
+            };
+        }
+        else
+        {
+            AuthorId = command.Author.Id;
+        }
+        
     }
     public Book(){}
 }

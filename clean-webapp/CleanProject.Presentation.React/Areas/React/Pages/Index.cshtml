@@ -1,0 +1,19 @@
+@page "/React/"
+@model CleanProject.Presentation.React.Areas.React.Pages.Index
+@using CleanProject.Presentation.React.Extensions
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment Environment
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/_content/CleanProject.Presentation.React/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+    @Environment.RenderStyles("src/main.tsx")
+</head>
+<body>
+<div id="root"></div>
+</body>
+@Environment.RenderScripts("src/main.tsx")
+</html>

@@ -1,6 +1,7 @@
 using CleanProject.CoreApplication.Infrastructure.Token;
 using CleanProject.Persistence.EF.Entities.Identity;
 using CleanProject.Presentation.React.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ public class AuthController : AreaControllerBase
     public record RegisterPayload(string Email, string Password);
     // POST: /api/_react/auth/register
     [HttpPost("register")]
+    [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterPayload payload)
     {
         var user = new AppUser() { UserName = payload.Email, Email = payload.Email };
@@ -36,6 +38,7 @@ public class AuthController : AreaControllerBase
     
     // POST: api/_react/auth/login
     [HttpPost("login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] RegisterPayload payload)
     {
         var user = await _userManager.FindByEmailAsync(payload.Email);

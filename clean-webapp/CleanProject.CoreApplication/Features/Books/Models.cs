@@ -23,7 +23,19 @@ public class BookDto : IWithKey<Guid>
     {
         Title = command.Title;
         YearPublished = command.Year;
-        Author = new AuthorDto() { Id = command.AuthorId };
+        if (command.AuthorId != null)
+        {
+            Author = new AuthorDto() { Id = command.AuthorId.Value };    
+        }
+        else
+        {
+            Author = new AuthorDto()
+            {
+                Id = Guid.Empty,
+                Name = command.AuthorName!,
+            };
+        }
+        
         Publishers = command.PublisherIds.Select(x => new PublisherDto { Id = x }).ToList();
     }
 

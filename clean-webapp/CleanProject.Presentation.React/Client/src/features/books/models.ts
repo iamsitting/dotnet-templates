@@ -3,4 +3,5 @@ type Book = {
     author: string;
     id: string|null;
     year: number;
+    publisher: string;
 }

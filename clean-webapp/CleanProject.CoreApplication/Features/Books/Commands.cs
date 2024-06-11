@@ -1,10 +1,9 @@
 using CleanProject.CoreApplication.Infrastructure;
 using CleanProject.CoreApplication.Infrastructure.Template;
-using CleanProject.Infrastructure.Templates;
 
 namespace CleanProject.CoreApplication.Features.Books;
 
-public record AddBookCommand(string Title, Guid AuthorId, int Year, Guid[] PublisherIds);
+public record AddBookCommand(string Title, int Year, Guid[] PublisherIds, Guid? AuthorId, string? AuthorName);
 public record UpdateBookCommand(Guid Id, string Title, Guid AuthorId, int Year);
 
 public class CommandHandler
@@ -31,18 +30,15 @@ public class CommandHandler
             throw ex;
         }
 
-        if (string.IsNullOrEmpty(command.Title) || command.AuthorId == Guid.Empty || command.PublisherIds.Length == 0)
+        if (string.IsNullOrEmpty(command.Title))
         {
             var ex = new Exception("Invalid");
             _logger.LogError("Failed to add book", ex);
             throw ex;
         }
         
-
         _repository.Add(new BookDto(command));
         
-        var msg = await _templateService.GetTemplateFromParametersAsync(new ResetPasswordParameters("", "", "", ""));
-        await _emailService.SendEmailGenericAsync("", "", "", msg);
         _logger.LogInformation("Success!");
     }
 }
