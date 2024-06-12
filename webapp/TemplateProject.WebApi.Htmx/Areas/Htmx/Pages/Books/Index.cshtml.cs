@@ -1,16 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using TemplateProject.Database;
 using TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components;
 
 namespace TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books;
 
 public class Index : HtmxPageModel
 {
-    public readonly TemplateProjectContext DbContext;
+    private readonly BookListActions _bookListActions;
+    private readonly EditRowActions _editRowActions;
 
-    public Index(TemplateProjectContext context)
+    public Index(IBookRepository repository)
     {
-        DbContext = context;
+        _bookListActions = new BookListActions(repository);
+        _editRowActions = new EditRowActions(repository);
     }
 
     public IActionResult OnGet()
@@ -21,16 +22,19 @@ public class Index : HtmxPageModel
 
     public IActionResult OnGetBookList()
     {
-        return this.BookList();
+        var component = _bookListActions.BookList();
+        return Partial(component.View, component.Model);
     }
 
     public IActionResult OnGetEditRow([FromQuery] Guid id)
     {
-        return this.EditRow(id);
+        var component = _editRowActions.EditRow(id);
+        return Partial(component.View, component.Model);
     }
 
     public IActionResult OnPutSubmitRow([FromForm] BookViewModel payload)
     {
-        return this.SubmitRow(payload);
+        var component = _editRowActions.SubmitRow(payload);
+        return Partial(component.View, component.Model);
     }
 }

@@ -1,15 +1,20 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components;
 
 public record BookViewModel(Guid Id, string Title, string Author, int Year);
 public record BookList(IEnumerable<BookViewModel> Books);
 
-public static class BookListHandlers
+public class BookListActions
 {
-    public static IActionResult BookList(this Index page)
+    private readonly IBookRepository _repository;
+
+    public BookListActions(IBookRepository repository)
     {
-        var items = page.DbContext.Books.ToList().Select(x => new BookViewModel(x.Id, x.Title, x.Author, x.YearPublished));
-        return page.Partial("Components/_BookList", new BookList(items));
+        _repository = repository;
+    }
+
+    public ComponentResult BookList()
+    {
+        var books = _repository.GetBooks();
+        return new ComponentResult("Components/_BookList", new BookList(books));
     }
 }
