@@ -28,4 +28,9 @@ public class Index : HtmxPageModel
     {
         return this.EditRow(id);
     }
+
+    public IActionResult OnPutSubmitRow([FromForm] BookViewModel payload)
+    {
+        return this.SubmitRow(payload);
+    }
 }

@@ -12,4 +12,15 @@ public static class EditRowHandlers
         var vm = new BookViewModel(book.Id, book.Title, book.Author, book.YearPublished);
         return page.Partial("Components/_EditRow", new EditRowModel(vm, true));
     }
+
+    public static IActionResult SubmitRow(this Index page, BookViewModel payload)
+    {
+        var book = page.DbContext.Books.First(x => x.Id == payload.Id);
+        book.Title = payload.Title;
+        book.Author = payload.Author;
+        book.YearPublished = payload.Year;
+        page.DbContext.Books.Update(book);
+        page.DbContext.SaveChanges();
+        return page.Partial("Components/_EditRow", new EditRowModel(payload));
+    }
 }

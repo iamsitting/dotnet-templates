@@ -1,28 +1,31 @@
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components.EditRowModel
 @{
     var id = $"id-{Model.Book.Id}";
-    var editParam = new Dictionary<string, string>();
-    editParam.Add("id", Model.Book.Id.ToString());
+    var editParam = new Dictionary<string, string> { { "id", Model.Book.Id.ToString() } };
 }
 @if (Model.IsEdit)
 {
     <tr id="@id">
-        <td>
-            <a hx-get="" hx-page-handler="EditRow" hx-all-route-data="editParam" hx-target="#@id" hx-swap="outerHTML" style="cursor: pointer">Submit</a>
-        </td>
-        <td>
-            <input type="text" class="form-control" value="@Model.Book.Title"/>
-        </td>
-        <td>
-            <input type="text" class="form-control" value="@Model.Book.Author"/>
-        </td>
+        <form hx-put hx-page-handler="SubmitRow" hx-target="#@id" hx-swap="outerHTML">
+            @Html.AntiForgeryToken()
+            <input type="hidden" value="@Model.Book.Id" name="id"/>
+            <td>
+                <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+            </td>
+            <td>
+                <input type="text" class="form-control" value="@Model.Book.Title" name="title"/>
+            </td>
+            <td>
+                <input type="text" class="form-control" value="@Model.Book.Author" name="author"/>
+            </td>
+        </form>
     </tr>
 }
 else
 {
     <tr id="@id">
         <td>
-            <a hx-get="" hx-page-handler="EditRow" hx-all-route-data="editParam" hx-target="#@id" hx-swap="outerHTML" style="cursor: pointer">Edit</a>
+            <a hx-get hx-page-handler="EditRow" hx-all-route-data="editParam" hx-target="#@id" hx-swap="outerHTML" style="cursor: pointer">Edit</a>
         </td>
         <td>
             @Model.Book.Title
