@@ -1,0 +1,16 @@
+{
+  "name": "templateproject-htmx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "htmx.org": "^1.9.12",
+    "vite": "^5.2.13"
+  }
+}
