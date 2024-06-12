@@ -23,9 +23,21 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Htmx\Components\LoginForm.cshtml" />
+    <Content Remove="Client\package.json" />
+    <Content Remove="Client\package-lock.json" />
+    <None Include="Client\package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Client\package-lock.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
