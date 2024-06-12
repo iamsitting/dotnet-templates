@@ -1,0 +1,34 @@
+@model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components.EditRowModel
+@{
+    var id = $"id-{Model.Book.Id}";
+    var editParam = new Dictionary<string, string>();
+    editParam.Add("id", Model.Book.Id.ToString());
+}
+@if (Model.IsEdit)
+{
+    <tr id="@id">
+        <td>
+            <a hx-get="" hx-page-handler="EditRow" hx-all-route-data="editParam" hx-target="#@id" hx-swap="outerHTML" style="cursor: pointer">Submit</a>
+        </td>
+        <td>
+            <input type="text" class="form-control" value="@Model.Book.Title"/>
+        </td>
+        <td>
+            <input type="text" class="form-control" value="@Model.Book.Author"/>
+        </td>
+    </tr>
+}
+else
+{
+    <tr id="@id">
+        <td>
+            <a hx-get="" hx-page-handler="EditRow" hx-all-route-data="editParam" hx-target="#@id" hx-swap="outerHTML" style="cursor: pointer">Edit</a>
+        </td>
+        <td>
+            @Model.Book.Title
+        </td>
+        <td>
+            @Model.Book.Author
+        </td>
+    </tr>
+}

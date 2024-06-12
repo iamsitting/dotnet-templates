@@ -1,3 +1,4 @@
+@using TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components
 @model TemplateProject.WebApi.Htmx.Areas.Htmx.Pages.Books.Components.BookList
 
 <button class="btn btn-primary btn-sm" hx-get hx-page-handler="BookList" hx-target="#book-container">Get Book</button>
@@ -12,13 +13,8 @@
     <tbody>
     @foreach (var book in Model.Books)
     {
-        <tr>
-            <td>
-                <a hx-get="" hx-page-handler="EditBook">Edit</a>
-            </td>
-            <td>@book.Title</td>
-            <td>@book.Author</td>
-        </tr>
+        var viewModel = new EditRowModel(book);
+        <partial name="Components/_EditRow" model="viewModel"/>
     }
     </tbody>
 </table>

@@ -23,4 +23,9 @@ public class Index : HtmxPageModel
     {
         return this.BookList();
     }
+
+    public IActionResult OnGetEditRow([FromQuery] Guid id)
+    {
+        return this.EditRow(id);
+    }
 }
