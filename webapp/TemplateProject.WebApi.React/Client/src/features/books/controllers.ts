@@ -11,7 +11,7 @@ export async function getBooks() {
     }
 }
 
-export async function addBook(payload: BookCreate) {
+export async function addBook(payload: Book) {
     try {
         return await httpClient.post<Book>("api/_react/Books/add", payload, true);
     } catch(error) {

@@ -40,6 +40,18 @@
         htmx.process(errorDiv);
         errorDiv.scrollIntoView();
     });
+    
+    /* Global network error */
+    document.addEventListener("htmx:sendError", (e) => {
+        let errorDiv = document.querySelector("#error-msg");
+        console.error(e.detail.elt);
+        errorDiv.insertAdjacentHTML('beforeend', '<div class="alert alert-danger alert-dismissible fade show" role="alert">\
+        <span>Network error: Cannot reach server</span>\
+        <button type="button" class="btn-close" aria-label="Close" onclick="event.target.parentElement.remove()"></button>\
+        </div>');
+        htmx.process(errorDiv);
+        errorDiv.scrollIntoView();
+    });
 </script>
 </body>
 </html>
