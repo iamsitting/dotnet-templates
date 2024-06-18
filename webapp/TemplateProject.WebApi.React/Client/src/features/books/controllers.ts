@@ -1,4 +1,5 @@
 import HttpClient from "../../utils/httpClient.ts";
+import {Book} from "./models.ts";
 
 const httpClient = new HttpClient("/");
 

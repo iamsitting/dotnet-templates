@@ -1,38 +1,13 @@
-import {useState} from "react";
-import {addBook, getBooks} from "./controllers.ts";
 import {Link} from "react-router-dom";
+import {useBooksState} from "./store.ts";
 
 
 function BookList() {
-    const [books, setBooks] = useState<Book[]>([]);
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [year, setYear] = useState(1901);
-    
-    async function loadBooks(){
-        const data = await getBooks();
-        setBooks(data);
-    }
-    
-    async function addNewBook() {
-        const payload: Book = {
-            title,
-            author,
-            year,
-            id: null
-        }
-        const data = await addBook(payload)
-        if(data) {
-            setBooks([...books, data]);
-            setTitle('');
-            setAuthor('');
-            setYear(1901);
-        }
-    }
+    const store = useBooksState();
     
     return (
         <>
-            <button className="btn btn-primary" onClick={() => loadBooks()}>Get Books</button>
+            <button className="btn btn-primary" onClick={() => store.loadBooks()}>Get Books</button>
             <table className="table table-striped">
                 <thead>
                 <tr>
@@ -43,7 +18,7 @@ function BookList() {
                 </tr>
                 </thead>
                 <tbody>
-                {books.map(book => (
+                {store.state.books.map(book => (
                     <tr key={book.id}>
                         <td>{book.id}</td>
                         <td>{book.title}</td>
@@ -55,12 +30,12 @@ function BookList() {
             </table>
             <div>
                 <label className="form-label">Title</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control"/>
+                <input type="text" value={store.state.addBookForm.title} onChange={(e) => store.setTitle(e.target.value)} className="form-control"/>
                 <label className="form-label">Author</label>
-                <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} className="form-control"/>
+                <input type="text" value={store.state.addBookForm.author} onChange={(e) => store.setAuthor(e.target.value)} className="form-control"/>
                 <label className="form-label">Year</label>
-                <input type="number" value={year} onChange={(e) => setYear(parseInt(e.target.value))} className="form-control"/>
-                <button className="btn btn-sm" onClick={() => addNewBook()}>Add</button>
+                <input type="number" value={store.state.addBookForm.year} onChange={(e) => store.setYear(parseInt(e.target.value))} className="form-control"/>
+                <button className="btn btn-sm" onClick={() => store.addNewBook()}>Add</button>
             </div>
             <Link to={"/"}>Go Back</Link>
         </>
