@@ -1,8 +1,6 @@
-using CleanProject.CoreApplication.Domain;
-
 namespace CleanProject.Persistence.EF.Entities;
 
-public sealed class Author : IWithKey<Guid>, IBaseEntity
+public sealed class Author
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;

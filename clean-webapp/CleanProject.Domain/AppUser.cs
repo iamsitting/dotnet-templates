@@ -1,7 +1,8 @@
-namespace CleanProject.CoreApplication.Domain;
+﻿namespace CleanProject.Domain;
 
-public interface IUser
+public class AppUser
 {
+    public Guid Id { get; set; }
     public string? UserName { get; set; }
     public string? Email { get; set; }
     public bool EmailConfirmed { get; set; }

@@ -8,7 +8,7 @@ export default defineConfig({
     build: {
         outDir: "../wwwroot",
         emptyOutDir: true,
-        manifest: true,
+        manifest: 'vite/manifest.json',
         rollupOptions: {
             input: {
                 index: "./src/main.tsx"

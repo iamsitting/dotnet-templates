@@ -22,11 +22,11 @@ internal sealed class UserRoleMapConfiguration : IEntityTypeConfiguration<UserRo
         builder.Property(x => x.ArchivedOn)
             .HasColumnType(_types.Timestamp());
 
-        builder.HasOne(x => x.AppRole)
+        builder.HasOne(x => x.Role)
             .WithMany()
             .HasForeignKey(x => x.RoleId);
 
-        builder.HasOne(x => x.AppUser)
+        builder.HasOne(x => x.User)
             .WithMany()
             .HasForeignKey(x => x.UserId);
     }

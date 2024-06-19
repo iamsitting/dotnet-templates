@@ -1,60 +1,51 @@
-using CleanProject.CoreApplication.Domain;
+using CleanProject.Domain;
 
 namespace CleanProject.CoreApplication.Features.Books;
 
-public class BookDto : IWithKey<Guid>
+public record AddBookCommand(string Title, int Year, Guid[] PublisherIds, Guid? AuthorId, string? AuthorName);
+
+public record UpdateBookCommand(Guid Id, string Title, Guid AuthorId, int Year);
+
+public record GetAllBooksQuery();
+
+public record GetBookByIdQuery(Guid Id);
+
+public static class BookMapper
 {
-    public string Title { get; set; } = null!;
-    public int YearPublished { get; set; }
-    public Guid Id { get; set; }
-
-    public AuthorDto Author { get; set; } = null!;
-    public List<PublisherDto> Publishers { get; set; } = [];
-
-    public BookDto(UpdateBookCommand command)
+    public static Book ToBook(this UpdateBookCommand command)
     {
-        Id = command.Id;
-        Title = command.Title;
-        YearPublished = command.Year;
-        Author = new AuthorDto() { Id = command.AuthorId };
-    }
-
-    public BookDto(AddBookCommand command)
-    {
-        Title = command.Title;
-        YearPublished = command.Year;
-        if (command.AuthorId != null)
+        return new Book()
         {
-            Author = new AuthorDto() { Id = command.AuthorId.Value };    
-        }
-        else
-        {
-            Author = new AuthorDto()
+            Id = command.Id,
+            YearPublished = command.Year,
+            Title = command.Title,
+            Author = new Author()
             {
-                Id = Guid.Empty,
-                Name = command.AuthorName!,
-            };
-        }
-        
-        Publishers = command.PublisherIds.Select(x => new PublisherDto { Id = x }).ToList();
+                Id = command.Id
+            },
+        };
     }
 
-    public BookDto(GetBookByIdQuery query)
+    public static Book ToBook(this AddBookCommand command)
     {
-        Id = query.Id;
+        return new Book()
+        {
+            Title = command.Title,
+            YearPublished = command.Year,
+            Author = new Author()
+            {
+                Id = command.AuthorId ?? Guid.Empty,
+                Name = command.AuthorName ?? string.Empty
+            },
+            Publishers = command.PublisherIds.Select(x => new Publisher { Id = x }).ToList(),
+        };
     }
-    
-    public BookDto(){}
-}
 
-public class AuthorDto : IWithKey<Guid>
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
-}
-
-public class PublisherDto : IWithKey<Guid>
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
+    public static Book ToBook(this GetBookByIdQuery query)
+    {
+        return new Book()
+        {
+            Id = query.Id
+        };
+    }
 }

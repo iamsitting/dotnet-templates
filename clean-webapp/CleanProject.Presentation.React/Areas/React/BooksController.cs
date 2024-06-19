@@ -5,27 +5,25 @@ namespace CleanProject.Presentation.React.Areas.React;
 
 public class BooksController : AreaControllerBase
 {
-    private readonly CommandHandler _commandHandler;
-    private readonly QueryHandler _queryHandler;
+    private readonly BookService _bookService;
 
-    public BooksController(CommandHandler commandHandler, QueryHandler queryHandler)
+    public BooksController(BookService bookService)
     {
-        _commandHandler = commandHandler;
-        _queryHandler = queryHandler;
+        _bookService = bookService;
     }
 
 
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var results = _queryHandler.Handle(new GetAllBooksQuery());
+        var results = await _bookService.HandleAsync(new GetAllBooksQuery());
         return Ok(results);
     }
 
     [HttpPost("add")]
     public async Task<IActionResult> Add([FromBody] BookViewModel payload)
     {
-        await _commandHandler.HandleAsync(payload.ToCreateCommand());
+        await _bookService.HandleAsync(payload.ToCreateCommand());
         return Ok();
     }
 }

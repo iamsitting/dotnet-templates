@@ -1,8 +1,6 @@
-using CleanProject.CoreApplication.Domain;
-
 namespace CleanProject.Persistence.EF.Entities;
 
-public sealed class BookPublisherMap : IBaseEntity
+public sealed class BookPublisherMap
 {
     public Guid BookId { get; set; }
     public Book Book { get; set; } = null!;

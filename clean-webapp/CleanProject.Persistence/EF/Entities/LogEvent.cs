@@ -1,8 +1,6 @@
-using CleanProject.CoreApplication.Domain;
-
 namespace CleanProject.Persistence.EF.Entities;
 
-public class LogEvent : ILogEvent, IBaseEntity, IWithKey<Guid>
+public class LogEvent
 {
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }

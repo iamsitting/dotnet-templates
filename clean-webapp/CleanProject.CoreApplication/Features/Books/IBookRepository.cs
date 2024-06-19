@@ -1,11 +1,11 @@
-using CleanProject.CoreApplication.Domain;
+using CleanProject.Domain;
 
 namespace CleanProject.CoreApplication.Features.Books;
 
 public interface IBookRepository
 {
-    IEnumerable<BookDto> GetAll();
-    BookDto Add(BookDto command);
-    BookDto Update(BookDto command);
-    BookDto GetById(IWithKey<Guid> query);
+    IEnumerable<Book> GetAll();
+    Book Add(Book command);
+    Book Update(Book command);
+    Book GetById(Guid id);
 }

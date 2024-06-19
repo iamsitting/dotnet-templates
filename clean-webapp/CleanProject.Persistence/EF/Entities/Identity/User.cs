@@ -1,9 +1,8 @@
-using CleanProject.CoreApplication.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace CleanProject.Persistence.EF.Entities.Identity;
 
-public sealed class AppUser : IdentityUser<Guid>, IUser, IWithKey<Guid>
+public sealed class User : IdentityUser<Guid>
 {
     public bool IsArchived { get; set; }
     public DateTime CreatedOn { get; set; }

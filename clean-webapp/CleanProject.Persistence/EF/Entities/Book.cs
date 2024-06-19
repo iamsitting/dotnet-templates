@@ -1,9 +1,8 @@
-using CleanProject.CoreApplication.Domain;
 using CleanProject.CoreApplication.Features.Books;
 
 namespace CleanProject.Persistence.EF.Entities;
 
-public sealed class Book : IBaseEntity, IWithKey<Guid>
+public sealed class Book
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = null!;
@@ -15,9 +14,9 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
     public Author Author { get; set; } = null!;
     // reverse
     public List<BookPublisherMap> BookPublisherMaps { get; set; } = [];
-    public BookDto AsDto()
+    public Domain.Book AsDto()
     {
-        return new BookDto
+        return new Domain.Book
         {
             Title = Title,
             YearPublished = YearPublished,
@@ -27,18 +26,18 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
         };
     }
 
-    private static AuthorDto ToDto(Author entity)
+    private static Domain.Author ToDto(Author entity)
     {
-        return new AuthorDto()
+        return new Domain.Author()
         {
             Id = entity.Id,
             Name = entity.FullName()
         };
     }
 
-    private static PublisherDto ToDto(Publisher entity)
+    private static Domain.Publisher ToDto(Publisher entity)
     {
-        return new PublisherDto()
+        return new Domain.Publisher()
         {
             Id = entity.Id,
             Name = entity.Name
@@ -47,7 +46,7 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
     
     
     
-    public void MapFromDto(BookDto command)
+    public void MapFromDto(Domain.Book command)
     {
         Id = command.Id;
         Title = command.Title;
@@ -55,7 +54,7 @@ public sealed class Book : IBaseEntity, IWithKey<Guid>
         AuthorId = command.Author.Id;
     }
 
-    public Book(BookDto command)
+    public Book(Domain.Book command)
     {
         Title = command.Title;
         YearPublished = command.YearPublished;

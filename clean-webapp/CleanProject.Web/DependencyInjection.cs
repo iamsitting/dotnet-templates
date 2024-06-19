@@ -11,7 +11,7 @@ public static class DependencyInjection
 {
     public static void AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentity<AppUser, AppRole>()
+        services.AddIdentity<User, Role>()
             .AddEntityFrameworkStores<CleanProjectContext>()
             .AddDefaultTokenProviders();
         var settings = configuration.GetRequiredSection(Infrastructure.Token.TokenOptions.Key).Get<Infrastructure.Token.TokenOptions>();

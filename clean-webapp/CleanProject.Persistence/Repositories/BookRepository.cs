@@ -1,5 +1,4 @@
 using CleanProject.CoreApplication.Constants;
-using CleanProject.CoreApplication.Domain;
 using CleanProject.CoreApplication.Features.Books;
 using CleanProject.CoreApplication.Infrastructure.Caching;
 using CleanProject.Persistence.EF;
@@ -19,10 +18,10 @@ public class BookRepository : IBookRepository
         _cache = cache;
     }
 
-    public IEnumerable<BookDto> GetAll()
+    public IEnumerable<Domain.Book> GetAll()
     {
         var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.All);
-        var success = _cache.TryGet(key, out IEnumerable<BookDto> result);
+        var success = _cache.TryGet(key, out IEnumerable<Domain.Book> result);
         if (success) return result;
 
         result = _context.Books
@@ -32,7 +31,7 @@ public class BookRepository : IBookRepository
         return result;
     }
 
-    public BookDto Add(BookDto command)
+    public Domain.Book Add(Domain.Book command)
     {
         var entity = new Book(command)
         {
@@ -51,7 +50,7 @@ public class BookRepository : IBookRepository
         return entity.AsDto();
     }
 
-    public BookDto Update(BookDto command)
+    public Domain.Book Update(Domain.Book command)
     {
         var entity = _context.Books.First(x => x.Id == command.Id);
         entity.MapFromDto(command);
@@ -61,15 +60,15 @@ public class BookRepository : IBookRepository
         return entity.AsDto();
     }
 
-    public BookDto GetById(IWithKey<Guid> query)
+    public Domain.Book GetById(Guid id)
     {
-        var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.Id, query.Id.ToString());
-        var success = _cache.TryGet(key, out BookDto result);
+        var key = new CacheKey(CacheKeys.Domain.Books, CacheKeys.CacheType.Id, id.ToString());
+        var success = _cache.TryGet(key, out Domain.Book result);
         if (success) return result;
 
         result = _context.Books
             .Select(x => x.AsDto())
-            .First(x => x.Id == query.Id);
+            .First(x => x.Id == id);
         _cache.Set(key, result);
         return result;
     }

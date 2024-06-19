@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanProject.Persistence.EF.Configurations;
 
-internal sealed class AppRoleConfiguration : IEntityTypeConfiguration<AppRole>
+internal sealed class AppRoleConfiguration : IEntityTypeConfiguration<Role>
 {
     private readonly IColumnTypes _types;
 
@@ -13,7 +13,7 @@ internal sealed class AppRoleConfiguration : IEntityTypeConfiguration<AppRole>
         _types = types;
     }
 
-    public void Configure(EntityTypeBuilder<AppRole> builder)
+    public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.HasKey(x => x.Id);
         

@@ -1,26 +1,24 @@
 using CleanProject.CoreApplication.Infrastructure;
-using CleanProject.CoreApplication.Infrastructure.Template;
+using CleanProject.Domain;
 
 namespace CleanProject.CoreApplication.Features.Books;
 
-public record AddBookCommand(string Title, int Year, Guid[] PublisherIds, Guid? AuthorId, string? AuthorName);
-public record UpdateBookCommand(Guid Id, string Title, Guid AuthorId, int Year);
-
-public class CommandHandler
+public class BookService
 {
     private readonly IBookRepository _repository;
-    private readonly IAppLogger<CommandHandler> _logger;
-    private readonly IEmailService _emailService;
-    private readonly ITemplateService _templateService;
+    private readonly IAppLogger<BookService> _logger;
 
-    public CommandHandler(IBookRepository repository, IAppLogger<CommandHandler> logger, IEmailService emailService, ITemplateService templateService)
+    public BookService(IBookRepository repository, IAppLogger<BookService> logger)
     {
         _repository = repository;
         _logger = logger;
-        _emailService = emailService;
-        _templateService = templateService;
     }
 
+    public Book Handle(GetBookByIdQuery query)
+    {
+        var book = _repository.GetById(query.Id);
+        return book;
+    }
     public async Task HandleAsync(AddBookCommand command)
     {
         if (command.Year > DateTime.Now.Year)
@@ -37,8 +35,14 @@ public class CommandHandler
             throw ex;
         }
         
-        _repository.Add(new BookDto(command));
+        _repository.Add(command.ToBook());
         
         _logger.LogInformation("Success!");
+    }
+
+    public async Task<IEnumerable<Book>> HandleAsync(GetAllBooksQuery _)
+    {
+        var books = _repository.GetAll();
+        return books;
     }
 }

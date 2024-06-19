@@ -1,3 +1,4 @@
+using CleanProject.CoreApplication.Features.Auth;
 using CleanProject.CoreApplication.Features.Books;
 using CleanProject.Persistence.EF;
 using CleanProject.Persistence.Repositories;
@@ -17,5 +18,6 @@ public static class DependencyInjection
         services.AddDbContext<CleanProjectContext>(options => options.UseSqlite(connectionString));
 
         services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IAuthRepository, AuthRepository>();
     }
 }

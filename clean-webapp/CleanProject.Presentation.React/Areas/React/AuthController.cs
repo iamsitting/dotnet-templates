@@ -1,21 +1,17 @@
-using CleanProject.CoreApplication.Infrastructure.Token;
-using CleanProject.Persistence.EF.Entities.Identity;
-using CleanProject.Presentation.React.Extensions;
+using CleanProject.CoreApplication.Features.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanProject.Presentation.React.Areas.React;
 
 public class AuthController : AreaControllerBase
 {
-    private readonly UserManager<AppUser> _userManager;
-    private readonly ITokenService _tokenService;
+    
+    private readonly AuthService _service;
 
-    public AuthController(UserManager<AppUser> userManager, ITokenService tokenService)
+    public AuthController(AuthService service)
     {
-        _userManager = userManager;
-        _tokenService = tokenService;
+        _service = service;
     }
 
     public record RegisterPayload(string Email, string Password);
@@ -24,16 +20,8 @@ public class AuthController : AreaControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterPayload payload)
     {
-        var user = new AppUser() { UserName = payload.Email, Email = payload.Email };
-        var result = await _userManager.CreateAsync(user, payload.Password);
-        
-        if (result.Succeeded)
-        {
-            var token = _tokenService.GenerateJwtTokenForClaims(user.GetJwtClaims());
-            return Ok(new { Token = token });
-        }
-
-        return BadRequest(result.Errors);
+        var result = await _service.HandleAsync(new CreateUserCommand(payload.Email, payload.Password));
+        return Ok(new { result.Token });
     }
     
     // POST: api/_react/auth/login
@@ -41,15 +29,8 @@ public class AuthController : AreaControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] RegisterPayload payload)
     {
-        var user = await _userManager.FindByEmailAsync(payload.Email);
-        if (user == null) return Unauthorized("Could not find an associated account");
-
-        var success = await _userManager.CheckPasswordAsync(user, payload.Password);
-
-        if (!success) return Unauthorized();
-
-        var token = _tokenService.GenerateJwtTokenForClaims(user.GetJwtClaims());
-        return Ok(new { Token = token });
+        var resp = await _service.Handle(new GetUserQuery(payload.Email, payload.Password));
+        return Ok(new { Token = resp.Token });
 
     }
 }

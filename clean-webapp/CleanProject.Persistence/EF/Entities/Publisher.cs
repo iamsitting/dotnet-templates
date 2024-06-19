@@ -1,8 +1,6 @@
-using CleanProject.CoreApplication.Domain;
-
 namespace CleanProject.Persistence.EF.Entities;
 
-public sealed class Publisher : IWithKey<Guid>, IBaseEntity
+public sealed class Publisher
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;

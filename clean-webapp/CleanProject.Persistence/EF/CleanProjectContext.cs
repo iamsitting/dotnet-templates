@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanProject.Persistence.EF;
 
-public sealed class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>, UserRoleMap, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
+public sealed class CleanProjectContext : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>, UserRoleMap, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
 {
     private readonly IColumnTypes _types;
 
@@ -15,9 +15,7 @@ public sealed class CleanProjectContext : IdentityDbContext<AppUser, AppRole, Gu
     {
         _types = types;
     }
-
-    public DbSet<AppUser> AppUsers => Set<AppUser>();
-    public DbSet<AppRole> AppRoles => Set<AppRole>();
+    
     public DbSet<UserRoleMap> UserRoleMaps => Set<UserRoleMap>();
     public DbSet<LogEvent> LogEvents => Set<LogEvent>();
     public DbSet<Author> Authors => Set<Author>();

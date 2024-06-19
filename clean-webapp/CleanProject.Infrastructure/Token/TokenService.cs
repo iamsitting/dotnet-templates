@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using CleanProject.CoreApplication.Infrastructure.Token;
+using CleanProject.Domain;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -89,10 +90,10 @@ internal class TokenService : ITokenService
         }
     }
     
-    public string GenerateJwtTokenForClaims(IEnumerable<Claim> claims)
+    public string GenerateJwtTokenForClaims(AppUser appUser)
     {
         var credentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-
+        var claims = GetJwtClaims(appUser);
         var token = new JwtSecurityToken(
             issuer: _issuer,
             audience: _audience,
@@ -102,5 +103,13 @@ internal class TokenService : ITokenService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    
+    private static IEnumerable<Claim> GetJwtClaims(AppUser appUser)
+    {
+        Claim[] claims = [];
+        claims = [..claims, new Claim(JwtRegisteredClaimNames.Sub, appUser.Id.ToString())];
+        claims = [..claims, new Claim(JwtRegisteredClaimNames.Email, appUser.Email!)];
+        return claims;
     }
 }
