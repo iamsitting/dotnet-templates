@@ -44,8 +44,12 @@ public class BookRepository : IBookRepository
         {
             BookId = entity.Id,
             PublisherId = x.Id
-        });
-        _context.BookPublisherMaps.AddRange(maps);
+        }).ToList();
+        if (maps.Any())
+        {
+            _context.BookPublisherMaps.AddRange(maps);
+            _context.SaveChanges();
+        }
         _cache.ClearDomain(CacheKeys.Domain.Books);
         return entity.AsDto();
     }

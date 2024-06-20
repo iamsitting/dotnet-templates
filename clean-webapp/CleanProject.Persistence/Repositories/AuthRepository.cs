@@ -16,7 +16,7 @@ public class AuthRepository : IAuthRepository
         _userManager = userManager;
     }
 
-    public async Task<Domain.AppUser?> CreateUserAsync(string username, string email, string password)
+    public async Task<AppUser?> CreateUserAsync(string username, string email, string password)
     {
         var user = new User()
         {
@@ -27,7 +27,7 @@ public class AuthRepository : IAuthRepository
         return result.Succeeded ? user.ToUser() : null;
     }
 
-    public async Task<Domain.AppUser?> GetUserAsync(string email, string password)
+    public async Task<AppUser?> GetUserAsync(string email, string password)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user == null) return null;
