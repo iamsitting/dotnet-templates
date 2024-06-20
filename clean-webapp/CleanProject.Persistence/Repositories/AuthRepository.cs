@@ -1,10 +1,8 @@
 using CleanProject.CoreApplication.Features.Auth;
 using CleanProject.Domain;
-using CleanProject.Persistence.EF.Entities.Identity;
 using CleanProject.Persistence.Extension;
 using Microsoft.AspNetCore.Identity;
 using User = CleanProject.Persistence.EF.Entities.Identity.User;
-
 namespace CleanProject.Persistence.Repositories;
 
 public class AuthRepository : IAuthRepository
@@ -33,5 +31,11 @@ public class AuthRepository : IAuthRepository
         if (user == null) return null;
         var success = await _userManager.CheckPasswordAsync(user, password);
         return success ? user.ToUser() : null;
+    }
+
+    public async Task<AppUser?> GetUser(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        return user?.ToUser();
     }
 }

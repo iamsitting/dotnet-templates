@@ -1,0 +1,24 @@
+@page "/Hypermedia"
+@model CleanProject.Presentation.Hypermedia.Areas.Hypermedia.Pages.Landing.Index
+
+@if (Model.IsLoggedIn)
+{
+    <div>
+        <h3>Books</h3>
+        <button class="btn btn-primary btn-sm" hx-get hx-page="/Books/Index">View Books</button>
+    </div>
+}
+else
+{
+    <div>
+        @if (Model.CurrentUrl?.EndsWith("#register") ?? false)
+        {
+            <div hx-get hx-page-handler="RegisterForm" hx-trigger="load" hx-swap="outerHTML"></div>
+        }
+        else
+        {
+            <div hx-get hx-page-handler="LoginForm" hx-trigger="load" hx-swap="outerHTML"></div>
+        }
+        
+    </div>
+}

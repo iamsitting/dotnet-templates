@@ -1,0 +1,36 @@
+@using CleanProject.Presentation.Hypermedia.Extensions
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment Environement
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["PageTitle"]</title>
+    @Environement.RenderStyles("src/index.js")
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+<div id="root">
+    <div>
+        <a href="https://vitejs.dev" target="_blank">
+            <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo" alt="Vite logo"/>
+        </a>
+        <a href="https://react.dev" target="_blank">
+            <img src="/_content/TemplateProject.WebApi.Htmx/background.png" class="logo react" alt="React logo"/>
+        </a>
+    </div>
+    <h1>Razor + HTMX</h1>
+    <div id="error-msg" class="uk-margin-remove">
+    </div>
+    <div class="card">
+        <main id="main-content">
+            @RenderBody()
+        </main>
+    </div>
+    <p class="read-the-docs">
+        Click on the Vite and React logos to learn more
+    </p>
+</div>  
+@Environement.RenderScripts("src/index.js")
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
